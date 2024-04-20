@@ -46,25 +46,35 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- <p class="small">Create a new row using this form, make sure you fill them all</p> -->
-                                        <form action="{{ route('pppoe.add') }}" method="POST">
+                                        <form action="{{ route('hotspot.add') }}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group form-group-default">
                                                         <label>User</label>
-                                                        <input name="user" type="text" class="form-control" placeholder="User" required>
+                                                        <input name="user" type="text" class="form-control @error ('user') is-invalid @enderror" placeholder="User">
+                                                        @error ('user')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group form-group-default">
                                                         <label>Password</label>
-                                                        <input name="password" type="text" class="form-control" placeholder="Password" required>
+                                                        <input name="password" type="text" class="form-control @error ('password') is-invalid @enderror" placeholder="Password">
+                                                        @error ('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group form-group-default">
                                                         <label>Server</label>
-                                                        <select name="server" class="form-control" placeholder="Password" required>
+                                                        <select name="server" class="form-control" placeholder="Server">
                                                             <option disabled selected>Pilih</option>
                                                             @foreach ($server as $data)
                                                             <option>{{ $data['name'] }}</option>
@@ -75,7 +85,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group form-group-default">
                                                         <label>Profile</label>
-                                                        <select name="profile" class="form-control" placeholder="Profile" required>
+                                                        <select name="profile" class="form-control" placeholder="Profile">
                                                             <option disabled selected>Pilih</option>
                                                             @foreach ($profile as $data)
                                                             <option>{{ $data['name'] }}</option>
@@ -86,7 +96,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group form-group-default">
                                                         <label>Time Limit</label>
-                                                        <input name="timelimit" type="text" class="form-control" placeholder="Time Limit">
+                                                        <input name="limit-uptime" type="text" class="form-control" placeholder="Time Limit">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
@@ -199,17 +209,16 @@
 </div>
 </div>
 
-@php
-function formatBytes($bytes, $decimal = null)
+<?php function formatBytes($bytes, $decimal = null)
 {
-$satuan = ['Bytes', 'Kb', 'Mb', 'Gb', 'Tb'];
-$i = 0;
-while ($bytes > 1024) {
-$bytes /= 1024;
-$i++;
+    $satuan = ['Bytes', 'Kb', 'Mb', 'Gb', 'Tb'];
+    $i = 0;
+    while ($bytes > 1024) {
+        $bytes /= 1024;
+        $i++;
+    }
+    return round($bytes, $decimal) . '-' . $satuan[$i];
 }
-return round($bytes, $decimal) . '-' . $satuan[$i];
-}
-@endphp
+?>
 
 @endsection
