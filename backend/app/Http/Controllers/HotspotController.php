@@ -49,19 +49,18 @@ class HotspotController extends Controller
         $API->debug('false');
 
         if ($API->connect($ip, $user, $pass)) {
-            $API->comm("/ppp/secret/add", [
+            $API->comm("/ip/hotspot/user/add", [
                 "name" => $request['user'],
                 "password" => $request['password'],
-                "service" => $request['service'] == '' ? 'any' : $request['service'],
-                "profile" => $request['profile'] == '' ? 'default' : $request['profile'],
-                "local-address" => $request['local-address'] == '' ? '0.0.0.0' : $request['local-address'],
-                "remote-address" => $request['remote-address'] == '' ? '0.0.0.0' : $request['remote-address'],
+                "server" => $request['server'],
+                "profile" => $request['profile'],
+                "limit-uptime" => $request['limit-uptime'] == '' ? '0' : $request['limit-uptime'],
                 "comment" => $request['comment'] == '' ? '' : $request['comment'],
             ]);
         } else {
             return 'Koneksi Gagal';
         }
 
-        return redirect()->route('pppoe.secret');
+        return redirect()->route('hotspot.user');
     }
 }
