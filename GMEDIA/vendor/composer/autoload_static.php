@@ -336,8 +336,8 @@ class ComposerStaticInit54a8c80beeafc4534c8a28c9a79b1816
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -535,6 +535,7 @@ class ComposerStaticInit54a8c80beeafc4534c8a28c9a79b1816
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\HostpotController' => __DIR__ . '/../..' . '/app/Http/Controllers/HostpotController.php',
+        'App\\Http\\Controllers\\InterfaceController' => __DIR__ . '/../..' . '/app/Http/Controllers/InterfaceController.php',
         'App\\Http\\Controllers\\LandingController' => __DIR__ . '/../..' . '/app/Http/Controllers/LandingController.php',
         'App\\Http\\Controllers\\MitraController' => __DIR__ . '/../..' . '/app/Http/Controllers/MitraController.php',
         'App\\Http\\Controllers\\PemesananController' => __DIR__ . '/../..' . '/app/Http/Controllers/PemesananController.php',

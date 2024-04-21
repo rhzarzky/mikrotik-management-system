@@ -80,8 +80,8 @@
                  <!--  Cara transaksi --> 
                     <b class="form-text">PERHATIAN !!
                       <ul>
-                          <li>Pembayaran Ovo/Dana Ke (085712058763)</li>
-                          <li>No.Rekening 764585649 (BCA)</li>
+                          <li>Pembayaran Ovo/Dana Ke (089512537245)</li>
+                          <li>No.Rekening 901886855971 (Seabank)</li>
                       </ul>
                     </b>
                           <button type="submit" class="btn btn-primary btn-lg mb-2 float-right" >Bayar</button>

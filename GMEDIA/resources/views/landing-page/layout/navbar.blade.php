@@ -15,7 +15,28 @@
           <li><a class="nav-link scrollto" href="#pricing">Harga</a></li>
           <li><a class="nav-link scrollto" href="#hotspot">Hotspot</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="/login" >Login</a></li>
+          @auth
+            <!-- Jika pengguna sudah login, tampilkan logo profile -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-person-circle" style="font-size: 36px;"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <!-- Tautan untuk Dashboard -->
+                        <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                        <!-- Form untuk Logout -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <!-- Tombol untuk Logout -->
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                </div>
+            </li>
+
+          @else
+            <!-- Jika pengguna belum login, tampilkan tombol login -->
+            <li><a class="getstarted scrollto" href="/login">Login</a></li>
+          @endauth
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

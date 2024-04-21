@@ -49,8 +49,10 @@ class PemesananController extends Controller
 
         $totalPrice = $request->jumlah * $harga;
 
+        $user_id = Auth::id();
+
         $data= new pemesanan;
-        $data->user_id = $request->user_id;
+        $data->user_id = $user_id;
         $data->profile = $request->profile;
         $data->limit = $request->limit;
         $data->total = $totalPrice;

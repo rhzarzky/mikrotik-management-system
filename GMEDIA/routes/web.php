@@ -7,6 +7,7 @@ use App\Http\controllers\TransaksiController;
 use App\Http\controllers\TrafficController;
 use App\Http\controllers\LandingController;
 use App\Http\controllers\PemesananController;
+use App\Http\Controllers\InterfaceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,15 @@ Route::post('logout',[AuthController::class, 'logout'])->name('logout');
 //dashboard
 Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/cpu',[DashboardController::class, 'cpu'])->name('dashboard.cpu');
+
+// Realtime
+Route::get('dashboard/load', [DashboardController::class, 'load'])->name('dashboard.load');
+Route::get('dashboard/uptime', [DashboardController::class, 'uptime'])->name('dashboard.uptime');
+Route::get('dashboard/{traffic}', [DashboardController::class, 'traffic'])->name('dashboard.traffic');
+Route::get('dashboard-special/{traffic}', [DashboardController::class, 'traffic_special'])->name('dashboard.traffic-special');
+
+// Check Traffic Interface
+Route::get('/interface', [InterfaceController::class, 'interface'])->name('interface');
 
 //hotspot-voucher
 Route::get('/hotspot/voucher', [HostpotController::class, 'voucher'])->name('voucher');

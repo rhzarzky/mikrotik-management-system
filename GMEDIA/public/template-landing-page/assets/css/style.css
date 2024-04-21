@@ -166,7 +166,7 @@ h6 {
   padding: 10px 0 10px 30px;
   font-size: 15px;
   font-weight: 500;
-  color: #fff;
+  color: #000000;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -182,7 +182,11 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #0086c4;
+  color: #ffffff;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  color: #000000;
 }
 
 .navbar .getstarted,
@@ -268,6 +272,9 @@ h6 {
     left: -100%;
   }
 }
+
+.dashboard-link {
+  color: black;}
 
 /**
 * Mobile Navigation 

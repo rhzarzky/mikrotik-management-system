@@ -104,7 +104,7 @@ class LandingController extends Controller
     
         // Tampilkan invoice dengan data transaksi
         return view('landing-page.invoice', compact('data'));
-    }
+    }    
     
 
     

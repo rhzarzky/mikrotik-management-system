@@ -2558,6 +2558,7 @@ input[type="button"].btn-block {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem; }
+  
 
 .dropdown-menu-left {
   right: auto;
@@ -2706,6 +2707,11 @@ input[type="button"].btn-block {
     pointer-events: none;
     background-color: transparent; }
 
+
+
+.dashboard-link {
+      color: black;}
+      
 .dropdown-menu.show {
   display: block; }
 

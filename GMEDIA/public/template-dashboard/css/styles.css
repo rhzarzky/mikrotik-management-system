@@ -3585,6 +3585,7 @@ textarea.form-control-lg {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
+
 .dropdown-menu[data-bs-popper] {
   top: 100%;
   left: 0;
@@ -3788,6 +3789,10 @@ textarea.form-control-lg {
   background-color: transparent;
   border: 0;
 }
+
+.dashboard-link {
+  color: black;}
+
 .dropdown-item:hover, .dropdown-item:focus {
   color: #1e2125;
   background-color: #e9ecef;

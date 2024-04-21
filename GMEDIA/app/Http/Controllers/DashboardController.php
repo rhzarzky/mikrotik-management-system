@@ -27,6 +27,10 @@ class DashboardController extends Controller
             $hotspotuser = $API->comm('/ip/hotspot/user/print');
             $hotspotprofile = $API->comm('/ip/hotspot/user/profile/print');
             $resource = $API->comm('/system/resource/print');
+            $interface = $API->comm('/interface/ethernet/print');
+            $routerboard = $API->comm('/system/routerboard/print');
+            $identity = $API->comm('/system/identity/print');
+
     	}else{
            return redirect('/login') -> with('alert','Tidak Dapat Terhubung');
            
@@ -39,6 +43,14 @@ class DashboardController extends Controller
     		'network' => $address [0]['network'],
     		'interface' => $address [0]['interface'],
             'cpu' => $resource[0]['cpu-load'],
+            'uptime' => $resource[0]['uptime'],
+            'version' => $resource[0]['version'],
+            'interface' => $interface,
+            'boardname' => $resource[0]['board-name'],
+            'freememory' => $resource[0]['free-memory'],
+            'freehdd' => $resource[0]['free-hdd-space'],
+            'model' => $routerboard[0]['model'],
+            'identity' => $identity[0]['name'],
     	]; 
 
     // Total transaksi
@@ -95,4 +107,100 @@ class DashboardController extends Controller
             return view('failed');
         }
     }
+
+    public function uptime()
+    {
+        $ip = session()->get('ip');
+        $user = session()->get('user');
+        $pass = session()->get('pass');
+        $API = new RouterosAPI();
+        $API->debug = false;
+
+        if ($API->connect($ip, $user, $pass)) {
+
+            $uptime = $API->comm('/system/resource/print');
+
+            $data = [
+                'uptime' => $uptime['0']['uptime'],
+            ];
+
+            return view('realtime.uptime', $data);
+        } else {
+
+            return view('failed');
+        }
+    }
+
+
+
+
+    public function traffic_special($traffic)
+    {
+        $ip = session()->get('ip');
+        $user = session()->get('user');
+        $pass = session()->get('pass');
+        $API = new RouterosAPI();
+        $API->debug = false;
+
+        if ($API->connect($ip, $user, $pass)) {
+            $traffic = $API->comm('/interface/monitor-traffic', array(
+                'interface' => $traffic,
+                'once' => '',
+            ));
+
+            $rx = $traffic[0]['rx-bits-per-second'];
+            $tx = $traffic[0]['tx-bits-per-second'];
+
+            $data = [
+                'rx' => $rx,
+                'tx' => $tx,
+            ];
+
+            return response()->json($data);
+        } else {
+
+            return view('failed');
+        }
+    }
+
+    public function traffic($traffic)
+    {
+        $ip = session()->get('ip');
+        $user = session()->get('user');
+        $pass = session()->get('pass');
+        $API = new RouterosAPI();
+        $API->debug = false;
+
+        if ($API->connect($ip, $user, $pass)) {
+            $traffic = $API->comm('/interface/monitor-traffic', array(
+                'interface' => $traffic,
+                'once' => '',
+            ));
+
+            $rx = $traffic[0]['rx-bits-per-second'];
+            $tx = $traffic[0]['tx-bits-per-second'];
+
+            $data = [
+                'rx' => $rx,
+                'tx' => $tx,
+            ];
+
+
+            return view('realtime.traffic', $data);
+        } else {
+
+            return view('failed');
+        }
+    }
+
+
+    public function load()
+    {
+        $data = Report::orderBy('created_at', 'desc')->limit('2')->get();
+
+        return view('realtime.load', compact('data'));
+    }
+
+
 }
+error_reporting(0);

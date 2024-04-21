@@ -46,6 +46,7 @@ class MitraController extends Controller
             // Validasi data yang diterima dari formulir
             $validasi = $request->validate([
                 'address' => 'required',
+                'email' => 'required',
                 'username'=> 'required',
                 'password' =>'required',
                 'level' => 'required'
