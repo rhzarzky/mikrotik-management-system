@@ -8,7 +8,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>@yield('title')</title>
-        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('template-dashboard') }}/assets/img/logo.png">
+        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('template-dashboard') }}/assets/img/favicon.png">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{{ asset('template-dashboard') }}/css/styles.css" rel="stylesheet" />

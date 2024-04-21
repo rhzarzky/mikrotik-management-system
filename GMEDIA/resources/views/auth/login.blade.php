@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Gmedia.net - Login</title>
-        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('template-dashboard') }}/assets/img/logo.png">
+        <link rel="shortcut icon" type="image/jpeg" href="{{ asset('template-dashboard') }}/assets/img/favicon.png">
         <link href="{{ asset('template-dashboard') }}/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>

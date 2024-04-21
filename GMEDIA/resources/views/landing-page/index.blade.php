@@ -14,7 +14,7 @@
           <h2>Mari Bergabung Bersama Kami di gmedia.net</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started scrollto">Buruan Daftar sekarang</a>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <a href="https://youtu.be/2-iU_VmnO9c" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -161,9 +161,9 @@
             <img src="{{ asset('template-landing-page') }}/assets/img/skills.png" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-            <h3>Berikut macam-macam kecepatan dalam menggukkan internet Gmedianet.</h3>
+            <h3>Berikut tingkat kepuasan pengguna pada beberapa aplikasi dalam menggunakan internet Gmedianet.</h3>
             <p class="fst-italic">
-              Data diambil dari random data dari pelanggan kami.
+              Data diambil dari survei kepuasan pelanggan kami.
             </p>
 
             <div class="skills-content">
@@ -197,9 +197,9 @@
               </div>
 
               <div class="progress">
-                <span class="skill">Mobilelegns <i class="val">50 %</i></span>
+                <span class="skill">Mobile legends <i class="val">100 %</i></span>
                 <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
 
@@ -358,7 +358,7 @@
           </div>
 
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="../forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name">Your Name</label>
