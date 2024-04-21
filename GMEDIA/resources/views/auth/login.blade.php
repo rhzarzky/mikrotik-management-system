@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Azzahra.net - Login</title>
+        <title>Gmedia.net - Login</title>
         <link rel="shortcut icon" type="image/jpeg" href="{{ asset('template-dashboard') }}/assets/img/logo.png">
         <link href="{{ asset('template-dashboard') }}/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -44,6 +44,10 @@
                                                 <input type="text" class="form-control" name="username" placeholder="Masukkan Username" required>
                                                 <label class="form-label">Username</label>
                                             </div>
+                                            <!-- <div class="form-floating mb-3"> 
+                                                <input type="email" class="form-control" name="email" placeholder="Masukkan Email" required>
+                                                <label class="form-label">Email</label>
+                                            </div> -->
                                             <div class="form-floating mb-3">
                                                 <input type="password" class="form-control" name="password" placeholder="Password ">
                                                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -87,7 +91,7 @@
         <form class="form-control mt-5" action="{{ route('login.post') }}" method="POST" >
           @csrf
         <div class="text-center">
-            <h1 class="h4 text-gray-900 mb-4 mt-2">Welcome Azzahra.Net</h1>
+            <h1 class="h4 text-gray-900 mb-4 mt-2">Welcome Gmedia.Net</h1>
         </div>
          <div class="mb-3">
             <label class="form-label">IP Address</label>

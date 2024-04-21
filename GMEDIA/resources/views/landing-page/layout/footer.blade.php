@@ -6,13 +6,11 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>AzZahra.net</h3>
+            <h3>Gmedia.net</h3>
             <p>
-              Desa Panjerejo, RT. 001/03, Kec. Rejo Tangan, 
-              Baran II, Panjerejo, TulungAgung, Kabupaten 
-              Tulungagung, Jawa Timur 66292
-              <strong>Phone:</strong> 085156330147<br>
-              <strong>Email:</strong> chosyifauruz@gmail.com<br>
+            No. 32 Jl. Nogotirto 55592 Gamping Daerah Istimewa Yogyakarta<br>
+              <strong>Phone:</strong> +62 274 380345<br>
+              <strong>Email:</strong> customercare@gmedia.id<br>
             </p>
           </div>
 
@@ -22,7 +20,7 @@
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">
-        &copy; Copyright <strong><span>Azzahra.Net</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Gmedia.Net</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->

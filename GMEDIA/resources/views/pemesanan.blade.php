@@ -1,5 +1,5 @@
  @extends('layout.master')
- @section('title','Azzahra.Net - Pemesanan')
+ @section('title','Gmedia.Net - Pemesanan')
  @section('content')
 
 <div id="layoutSidenav_content">

@@ -1,5 +1,5 @@
  @extends('layout.master')
- @section('title','Azzahra.Net - Settings')
+ @section('title','Gmedia.Net - Settings')
  @section('content')
 
  <div id="layoutSidenav_content">
