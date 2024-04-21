@@ -1,5 +1,5 @@
  @extends('layout.master')
- @section('title','Azzahra.Net - Active Voucher')
+ @section('title','Gmedia.Net - Active Voucher')
  @section('content')
 
 <div id="layoutSidenav_content">

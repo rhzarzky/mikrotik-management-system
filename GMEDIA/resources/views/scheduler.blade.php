@@ -1,5 +1,5 @@
  @extends('layout.master')
- @section('title','Azzahra.Net - Active Scheduler')
+ @section('title','Gmedia.Net - Active Scheduler')
  @section('content')
 
 <div id="layoutSidenav_content">

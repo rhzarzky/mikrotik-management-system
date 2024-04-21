@@ -1,6 +1,6 @@
 
  @extends('landing-page.layout.master')
- @section('title','Azzahra.Net')
+ @section('title','Gmedia.Net')
  @section('content')
 
 
@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
           <h1>Better Solution For your home internet</h1>
-          <h2>Mari Bergabung Bersama Kami di AzZahra.net</h2>
+          <h2>Mari Bergabung Bersama Kami di gmedia.net</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started scrollto">Buruan Daftar sekarang</a>
             <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
@@ -73,7 +73,7 @@
         <div class="row content">
           <div class="col-lg-6">
             <p>
-              AzZahra.net menyediakan banyak penawaran peket internet yang berbagai variasi mulai dari hotspot sampai dengan
+              Gmedia.net menyediakan banyak penawaran peket internet yang berbagai variasi mulai dari hotspot sampai dengan
               internet rumahan kami sediakan untuk kebutuhan pelanggan kami. dengan kecepatan yang setabil pelanggan kami akan mendapatkan 
               kepuasan dalam berjelajah di internet.
             </p>
@@ -85,7 +85,7 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Jaringan kami telah tersebar di berbagi RT di desa Panjerejo mulai dari sekolah Sdi Azzahra dari barat sampai timur
+              Jaringan kami telah tersebar di berbagi RT di desa Panjerejo mulai dari sekolah Sdi Gmedia dari barat sampai timur
               lalu keselatan sampai cakruk lombok dan ke timur dan kebarat. telah bergabung dengan kami. Ayo buruan daftar Internet untuk rumah anda.
             </p>
             <a href="#" class="btn-learn-more">Daftar</a>
@@ -104,7 +104,7 @@
           <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
             <div class="content">
-              <h3>Kenapa memilih  <strong>Azzahra.net untuk Internet dirumah Anda ?</strong></h3>
+              <h3>Kenapa memilih  <strong>Gmedia.net untuk Internet dirumah Anda ?</strong></h3>
               <p>
                 Berikut ialah ualasan dari kami.
               </p>
@@ -113,20 +113,20 @@
             <div class="accordion-list">
               <ul>
                 <li>
-                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Kenapa harus Memakai Azzahra.net? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Kenapa harus Memakai Gmedia.net? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                     <p>
-                      AzZahra.net menyediakan banyak penawaran peket internet yang berbagai variasi mulai dari hotspot sampai dengan
+                      Gmedia.net menyediakan banyak penawaran peket internet yang berbagai variasi mulai dari hotspot sampai dengan
                       internet rumahan kami sediakan untuk kebutuhan pelanggan kami.
                     </p>
                   </div>
                 </li>
 
                 <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Apa keunggulan dari Azzahra.net? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Apa keunggulan dari Gmedia.net? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Azzahra.net memiliki keunggulan dalam jaringan yang Setabil dan memiliki kecepatan yang banyak dan terstruktur.
+                      Gmedia.net memiliki keunggulan dalam jaringan yang Setabil dan memiliki kecepatan yang banyak dan terstruktur.
                     </p>
                   </div>
                 </li>
@@ -135,7 +135,7 @@
                   <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Bagaimana dengan internet lain? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Azzahra.net memiliki keunggulan internet yang murah dan stabil, Azzahranet tidak kalah dengan internet rumahan lainnya.
+                      Gmedia.net memiliki keunggulan internet yang murah dan stabil, Gmedianet tidak kalah dengan internet rumahan lainnya.
                     </p>
                   </div>
                 </li>
@@ -161,7 +161,7 @@
             <img src="{{ asset('template-landing-page') }}/assets/img/skills.png" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-            <h3>Berikut macam-macam kecepatan dalam menggukkan internet azzahranet.</h3>
+            <h3>Berikut macam-macam kecepatan dalam menggukkan internet Gmedianet.</h3>
             <p class="fst-italic">
               Data diambil dari random data dari pelanggan kami.
             </p>
@@ -217,7 +217,7 @@
 
         <div class="section-title">
           <h2>Paket</h2>
-          <p>Berikut ini adalah berbagi macam paket internet yang ada di AzZahra.net</p>
+          <p>Berikut ini adalah berbagi macam paket internet yang ada di Gmedia.net</p>
         </div>
 
         <div class="row">
@@ -272,7 +272,7 @@
 
         <div class="section-title">
           <h2>Paket Hotspot</h2>
-          <p>Berikut ini adalah berbagi macam paket internet hotspot yang ada di AzZahra.net</p>
+          <p>Berikut ini adalah berbagi macam paket internet hotspot yang ada di Gmedia.net</p>
         </div>
 
         <div class="row">
@@ -338,21 +338,21 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>Desa Panjerejo, RT. 001/03, Kec. Rejo Tangan, Baran II, Panjerejo, TulungAgung, Kabupaten Tulungagung, Jawa Timur 66292</p>
+                <p>No. 32 Jl. Nogotirto 55592 Gamping Daerah Istimewa Yogyakarta</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>chosyifairuz@gmail.com</p>
+                <h4>Customercare:</h4>
+                <p>customercare@gmedia.id</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>085156330147</p>
+                <p>+62 274 380345</p>
               </div>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246.85813303588512!2d112.01275687930915!3d-8.128934255161424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78e5ced1cba5c1%3A0xa98f2ea08f9b6a12!2sSekolah%20Dasar%20Islam%20Az%20Zahra%20Panjer%20Raya!5e0!3m2!1sid!2sid!4v1680199786942!5m2!1sid!2sid"  frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+              <iframe width='100%' height='400px' src="https://api.mapbox.com/styles/v1/wasiswsn/clv971jmt00q101qu0uy50wfw.html?title=false&access_token=pk.eyJ1Ijoid2FzaXN3c24iLCJhIjoiY2x2OTV6MmM3MHRjYzJsbngwdWE3bXJndiJ9.dbD90WnKo_4HhZI5lPVLFA&zoomwheel=false#15.41/-7.766114/110.335743" title="Untitled" style="border:none;" allowfullscreen></iframe>
             </div>
 
           </div>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Azzahra.Net-Form.Game Online</title>
+  <title>Gmedia.Net-Form.Game Online</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -58,7 +58,7 @@
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
                                     <select class="form-control" name="address" placeholder="Masukkan address" readonly>
-                                        <option selected value="192.168.10.1">Azzahra Pusat</option>
+                                        <option selected value="192.168.10.1">Gmedia Pusat</option>
                                     </select>
                                     <label class="form-label">Lokasi</label>
                                 </div>

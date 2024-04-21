@@ -34,7 +34,8 @@ class MitraController extends Controller
     }
 
 // add  mitra
-     public function addmitra(Request $request){
+
+    public function addmitra(Request $request){
         $ip = session()->get('ip');
         $user = session()->get('user');
         $pass = session()->get('pass');
@@ -42,26 +43,29 @@ class MitraController extends Controller
         $API->debug('false');
 
         if($API->connect($ip, $user, $pass)){
-
-            // Simpan data ke database
+            // Validasi data yang diterima dari formulir
             $validasi = $request->validate([
-              'address' => 'required',
-              'username'=> 'required',
-              'password' =>'required',
-              'level' => 'required'
+                'address' => 'required',
+                'username'=> 'required',
+                'password' =>'required',
+                'level' => 'required'
             ]);
 
+            // Enkripsi kata sandi sebelum menyimpannya ke dalam basis data
             $validasi['password'] = Hash::make($validasi['password']);
             
-            User::create($validasi);
-
-            return redirect('mitra')->with('success','Mitra berhasil ditambahkan');
-
+            // Tambahkan mitra ke tabel pengguna
+            try {
+                User::create($validasi);
+                return redirect('mitra')->with('success','Mitra berhasil ditambahkan');
+            } catch (\Exception $e) {
+                return redirect('mitra')->with('error','Gagal menambahkan mitra: '.$e->getMessage());
+            }
         } else {
-
             return redirect('failed');
         }
     }
+
 
 //Update
     public function ubah(Request $request, $id){

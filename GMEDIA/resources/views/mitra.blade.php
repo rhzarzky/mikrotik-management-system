@@ -1,5 +1,5 @@
  @extends('layout.master')
- @section('title','Azzahra.Net - Mitra')
+ @section('title','Gmedia.Net - Mitra')
  @section('content')
 
 <div id="layoutSidenav_content">
@@ -34,6 +34,10 @@
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" name="address" placeholder="Masukkan ip_address" required >
                                 <label class="form-label">Address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="Masukkan email" required >
+                                <label class="form-label">Email</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" name="username" placeholder="Masukkan user" required >
@@ -76,6 +80,7 @@
 								    <tr align="center">
 								        <th>No</th>
 								        <th>IP Address</th>
+								        <th>Email</th>
 								        <th>Username</th>
                                         <th>Level</th>
 								        <th>Action</th>
@@ -87,6 +92,7 @@
                                             <div hidden> {{ $item->id }} </div>
                                             <td> {{ $no + 1 }} </td> 
                                             <td> {{ $item->address }} </td>                     
+                                            <td> {{ $item->email }} </td>                     
                                             <td> {{ $item->username }} </td>
                                             <td> {{ $item->level}} </td>
                                             <td>
@@ -121,6 +127,10 @@
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" name="address" value="{{ $item -> address }}" placeholder="Masukkan user" required>
                                         <label class="form-label" for="user">Address</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" name="email" value="{{ $item -> address }}" placeholder="Masukkan email" required>
+                                        <label class="form-label" for="user">Email</label>
                                     </div>
                                     <div class="form-floating mb-3"> 
                                         <input type="text" class="form-control" name="username" value="{{ $item -> username }}" placeholder="Masukkan username" required>

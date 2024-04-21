@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','Azzahra.Net - Dashboard')
+@section('title','Gmedia.Net - Dashboard')
 @section('content')
     <div id="layoutSidenav_content">
         <main>
