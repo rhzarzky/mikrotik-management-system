@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '17a6dd3f46283baa3abaf154950dd16b46bf5bb7',
+        'reference' => '89d913d5015eb0ea4779461f16f827e667a2eddf',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -406,7 +406,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '17a6dd3f46283baa3abaf154950dd16b46bf5bb7',
+            'reference' => '89d913d5015eb0ea4779461f16f827e667a2eddf',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -781,8 +781,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1023,9 +1023,9 @@
             'dev_requirement' => false,
         ),
         'symfony/css-selector' => array(
-            'pretty_version' => 'v7.0.3',
-            'version' => '7.0.3.0',
-            'reference' => 'ec60a4edf94e63b0556b6a0888548bb400a3a3be',
+            'pretty_version' => 'v6.4.3',
+            'version' => '6.4.3.0',
+            'reference' => 'ee0f7ed5cf298cc019431bb3b3977ebc52b86229',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/css-selector',
             'aliases' => array(),

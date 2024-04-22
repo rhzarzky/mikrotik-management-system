@@ -56,21 +56,21 @@
             @csrf
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">IP Address</label>
-                <input type="text" class="form-control @error('ip') is-invalid @enderror" value="{{ old('ip') }}" name="ip" aria-describedby="emailHelp">
-                @error('ip')
+                <input type="text" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" name="address" aria-describedby="emailHelp">
+                @error('address')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">User</label>
-                <input type="text" class="form-control @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" aria-describedby="emailHelp">
-                @error('user')
+                <input type="text" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" name="username" aria-describedby="emailHelp">
+                @error('username')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control @error('pass') is-invalid @enderror" value="{{ old('pass') }}" name="pass">
+                <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password">
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
