@@ -7,9 +7,11 @@ use App\Http\Controllers\HotspotController;
 use App\Http\Controllers\PPPoEController;
 use Illuminate\Support\Facades\Route;
 
-
+//Login
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.post');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
