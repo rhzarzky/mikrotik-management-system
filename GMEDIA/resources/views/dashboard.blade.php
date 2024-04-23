@@ -18,6 +18,9 @@
                                     <p class="card-category">| UP Time: <span id="uptime"></span></p>
                                     <p class="card-category">| RAM: {{ formatBytes($freememory) }}</p>
                                     <p class="card-category">| Storage: {{ formatBytes($freehdd) }}</p>
+                                    <p class="card-category">| Model: {{ $model }}</p>
+                                    <p class="card-category">| Board: {{ $boardname }}</p>
+                                    <p class="card-category">| OS: {{ $version }}</p>
                                 </div>
                             </div>
                         </div>

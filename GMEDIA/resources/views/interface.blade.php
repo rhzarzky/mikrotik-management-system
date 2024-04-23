@@ -2,6 +2,11 @@
 @section('title','Gmedia.Net - Dashboard')
 @section('content')
 
+<script type="text/javascript" src="{{ asset('template-dashboard') }}/js/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="{{ asset('/') }}highchart/js/highcharts.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+
 
 <div id="layoutSidenav_content">
     <main>
