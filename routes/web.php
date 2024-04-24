@@ -3,6 +3,7 @@ use App\Http\controllers\AuthController;
 use App\Http\controllers\DashboardController;
 use App\Http\controllers\HostpotController;
 use App\Http\controllers\MitraController;
+use App\Http\controllers\RouterController;
 use App\Http\controllers\TransaksiController;
 use App\Http\controllers\TrafficController;
 use App\Http\controllers\LandingController;
@@ -39,9 +40,11 @@ Route::get('/voucher/{id}', [LandingController::class, 'pdf'])->name('pdf');
 
 
 //login
-Route::get('login',[AuthController::class, 'login'])->name('login');
-Route::post('/login',[AuthController::class, 'loginAuth'])->name('login.post');
+Route::get('login',[AuthController::class, 'Index'])->name('login');
+Route::get('loginAuth',[AuthController::class, 'loginAuth'])->name('loginAuth');
+Route::post('/login',[AuthController::class, 'login'])->name('login.post');
 Route::post('logout',[AuthController::class, 'logout'])->name('logout');
+Route::post('logoutUser',[AuthController::class, 'logoutUser'])->name('logoutUser');
 
 //dashboard
 Route::get('dashboard',[DashboardController::class, 'index'])->name('dashboard');
@@ -81,8 +84,15 @@ Route::get('/hotspot/scheduler', [HostpotController::class, 'scheduler'])->name(
 //Mitra
 Route::get('mitra',[MitraController::class, 'mitra'])->name('mitra');
 Route::post('mitra',[MitraController::class, 'addmitra'])->name('addmitra.post');
-Route::post('/mitra/edit/{id}', [MitraController::class, 'ubah'])->name('ubah');
+Route::post('/mitra/edit/{id}', [MitraController::class, 'ubah'])->name('mitra.edit');
 Route::get('/mitra/delete/{id}', [MitraController::class, 'deleteMitra'])->name('deleteMitra');
+Route::post('/mitra/update-password/{id}', [MitraController::class, 'updatePassword'])->name('updatePassword');
+
+//Router
+Route::get('router',[RouterController::class, 'router'])->name('router');
+Route::post('router',[RouterController::class, 'addrouter'])->name('addrouter.post');
+Route::post('/router/edit/{id}', [RouterController::class, 'ubah'])->name('router.edit');
+Route::get('/router/delete/{id}', [RouterController::class, 'deleteRouter'])->name('deleteRouter');
 
 //transaksi
 Route::get('transaksi',[TransaksiController::class, 'transaksi'])->name('transaksi');
@@ -94,6 +104,7 @@ Route::get('/transaksi/{id}', [TransaksiController::class, 'ambilRouter'])->name
 Route::get('/pemesanan', [PemesananController::class, 'pemesanan'])->name('keranjang');
 Route::post('/pemesanan/tambah', [PemesananController::class, 'PesanVoucher'])->name('PesanVoucher.post');
 Route::post('/pemesanan/upload/{id}', [PemesananController::class, 'UploadGambar'])->name('upload');
+Route::post('/pemesanan/edit/{id}', [PemesananController::class, 'edit'])->name('pemesanan.edit');
 Route::get('/pemesanan/{id}', [PemesananController::class, 'GeneratePemesanan'])->name('getpemesanan');
 Route::get('/pemesanan/hapus/{id}', [PemesananController::class, 'destroy'])->name('destroy_');
 Route::get('/pemesananPDF/{tglawal}/{tglakhir}', [PemesananController::class, 'savePDF'])->name('savePDF');

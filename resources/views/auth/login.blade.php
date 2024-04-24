@@ -34,24 +34,16 @@
                                         <img src="{{ asset('template-dashboard') }}/assets/img/logo.png" class="mx-auto d-block" width="210px">
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('login.post') }}" method="POST" >
+                                        <form action="{{ route('login') }}" method="POST" >
                                           @csrf
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" name="address" placeholder="Masukkan IP Address" required autofocus>
-                                                <label class="form-label">IP Address</label>
-                                            </div>
                                             <div class="form-floating mb-3"> 
-                                                <input type="text" class="form-control" name="username" placeholder="Masukkan Username" required>
-                                                <label class="form-label">Username</label>
-                                            </div>
-                                            <!-- <div class="form-floating mb-3"> 
                                                 <input type="email" class="form-control" name="email" placeholder="Masukkan Email" required>
                                                 <label class="form-label">Email</label>
-                                            </div> -->
+                                            </div>
                                             <div class="form-floating mb-3">
                                                 <input type="password" class="form-control" name="password" placeholder="Password ">
                                                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                                                <div class="form-text">*Masukkan username dan password dengan benar</div>
+                                                <div class="form-text">*Masukkan email dan password dengan benar</div>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a href="/" class="btn btn-link btn-lg"><i class="fa-sharp fa-solid fa-arrow-left"></i></a>

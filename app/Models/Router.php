@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class router extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,12 +18,20 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $table = 'users';
+    protected $table = 'routers';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'email', 
+        'id',
+        'user_id',
+        'address',
+        'username', 
         'password',
-        'level',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function pemesanan(){
         return $this->hasMany('App\Models\pemesanan');

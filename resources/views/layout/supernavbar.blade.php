@@ -41,49 +41,17 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menu</div>
-                            <a class="nav-link" href="{{ route('dashboard') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-house-signal"></i></div>
-                                Dashboard
-                            </a>
-                            <a class="nav-link" href="{{ route('interface') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-layer-group"></i></div>
-                                Interface
-                            </a>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-wifi"></i></div>
-                                Hotspot
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('voucher') }}">Voucher</a>
-                                    <a class="nav-link" href="{{ route('active') }}">Status</a>
-                                    <a class="nav-link" href="{{ route('scheduler') }}">Scheduler</a>
-                                </nav>
-                            </div>
-
-                            @if(Auth::check() && Auth::user()->level == 'admin')
-                            <a class="nav-link" href="{{ route('profile') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
-                                Profile Voucher
-                            </a>
-                              @endif
-
-                            <a class="nav-link" href="{{ route('keranjang') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-basket-shopping"></i></div>
-                                Pemesanan
-                            </a>
-
-                            <a class="nav-link" href="{{ route('transaksi') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-coins"></i></div>
-                                Transaksi
-                            </a>
-
                             <a class="nav-link" href="{{ route('router') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div>
-                                Kembali ke Router
+                                Router
                             </a>
-
+                            @if(Auth::check() && Auth::user()->level == 'admin')
+                            <a class="nav-link" href="{{ route('mitra') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-people-group"></i></div>
+                                Mitra
+                            </a>
+                            @endif
+                            
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages" hidden>
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Pages

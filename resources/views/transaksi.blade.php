@@ -1,4 +1,4 @@
- @extends('layout.master')
+ @extends('layout.supermaster')
  @section('title','Gmedia.Net - Transaksi')
  @section('content')
 

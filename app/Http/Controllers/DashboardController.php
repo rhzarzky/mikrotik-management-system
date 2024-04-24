@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\RouterosAPI;
-use App\Models\transaksi;
-use App\Models\pemesanan;
+use App\Models\Transaksi;
+use App\Models\Pemesanan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,8 +32,7 @@ class DashboardController extends Controller
             $identity = $API->comm('/system/identity/print');
 
     	}else{
-           return redirect('/login') -> with('alert','Tidak Dapat Terhubung');
-           
+           return redirect('router') -> with('alert','Tidak Dapat Terhubung');
     	}
 
     	$data = [

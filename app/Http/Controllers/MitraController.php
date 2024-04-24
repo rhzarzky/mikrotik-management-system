@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\RouterosAPI;
 use App\Models\User;
-use App\Models\pemesanan;
+use App\Models\Pemesanan;
 
 class MitraController extends Controller
 {
@@ -15,39 +15,19 @@ class MitraController extends Controller
     }
     
      public function mitra(){
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
-        $API = new RouterosAPI();
-        $API->debug('false');
-
-        if($API->connect($ip, $user, $pass)){
 
             $item = user::all();
 
             return view('mitra',['datausers' => $item]);
 
-        } else {
-
-            return redirect('failed');
-        }
     }
 
 // add  mitra
 
     public function addmitra(Request $request){
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
-        $API = new RouterosAPI();
-        $API->debug('false');
-
-        if($API->connect($ip, $user, $pass)){
             // Validasi data yang diterima dari formulir
             $validasi = $request->validate([
-                'address' => 'required',
                 'email' => 'required',
-                'username'=> 'required',
                 'password' =>'required',
                 'level' => 'required'
             ]);
@@ -62,9 +42,7 @@ class MitraController extends Controller
             } catch (\Exception $e) {
                 return redirect('mitra')->with('error','Gagal menambahkan mitra: '.$e->getMessage());
             }
-        } else {
-            return redirect('failed');
-        }
+
     }
 
 
@@ -72,8 +50,7 @@ class MitraController extends Controller
     public function ubah(Request $request, $id){
 
         $item = user::find($id);
-        $item->address = $request->address;
-        $item->username = $request->username;
+        $item->email = $request->email;
         $item->level = $request->level;
         $item->update();
 

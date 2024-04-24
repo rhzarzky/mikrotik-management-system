@@ -83,7 +83,7 @@ class LandingController extends Controller
     
         // Buat data transaksi
         $data = new transaksi([
-            'user_id' => $userId, // gunakan id pengguna yang ditemukan atau null jika pengguna tidak login
+            'user_id' => $request->userId, // gunakan id pengguna yang ditemukan atau null jika pengguna tidak login
             'username' => $request->username,
             'password' => $request->password,
             'profile' => $request->profile,

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use App\Models\pemesanan;
-use App\Models\User;
+use App\Models\Pemesanan;
+use App\Models\Router;
 
 class PemesananController extends Controller
 {
@@ -49,10 +49,10 @@ class PemesananController extends Controller
 
         $totalPrice = $request->jumlah * $harga;
 
-        $user_id = Auth::id();
+        $router_id = Auth::id();
 
         $data= new pemesanan;
-        $data->user_id = $user_id;
+        $data->router_id = $router_id;
         $data->profile = $request->profile;
         $data->limit = $request->limit;
         $data->total = $totalPrice;
@@ -62,55 +62,73 @@ class PemesananController extends Controller
         return redirect('/pemesanan')->with('success','Pesanan berhasil dibuat');
     }
 
-    public function GeneratePemesanan($id){
+    public function edit(Request $request, $id){
+      // Temukan data pemesanan berdasarkan ID
+      $pemesanan = Pemesanan::find($id);
+  
+      // Validasi input
+      $request->validate([
+          'profile' => 'required',
+          'limit' => 'required',
+          'jumlah' => 'required|numeric|min:1', // Menggunakan validasi untuk memastikan jumlah yang valid
+      ]);
+  
+      // Update data pemesanan dengan data baru dari request
+      $pemesanan->profile = $request->profile;
+      $pemesanan->limit = $request->limit;
+      $pemesanan->jumlah = $request->jumlah;
+      
+      // Simpan perubahan
+      $pemesanan->save();
+  
+      // Redirect kembali ke halaman pemesanan dengan pesan sukses
+      return redirect('/pemesanan')->with('success', 'Pemesanan berhasil diperbarui');
+  }
+  
 
-      //Ambil data dari database
-        $data = pemesanan::find($id);
-        $data->update(['status'=>'Selesai']);
-        $item = user::all();
+  public function GeneratePemesanan($id){
+    //Ambil data dari database
+    $data = pemesanan::find($id);
+    $data->update(['status'=>'Selesai']);
+    $item = router::all();
 
 
-        $mitra = $data->getOriginal('user_id');
-        $profile = $data->getOriginal('profile');
-        $limit = $data->getOriginal('limit');
-        $jumlah = $data->getOriginal('jumlah');
+    $mitra = $data->getOriginal('router_id');
+    $profile = $data->getOriginal('profile');
+    $limit = $data->getOriginal('limit');
+    $jumlah = $data->getOriginal('jumlah');
 
-      //Buat data pada mikrotik
+  //Buat data pada mikrotik
 
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
-        $API = new RouterosAPI();
-        $API->debug('false');
+    $ip = session()->get('ip');
+    $user = session()->get('user');
+    $pass = session()->get('pass');
+    $API = new RouterosAPI();
+    $API->debug('false');
 
-        if ($API->connect($ip, $user, $pass)){
+    if ($API->connect($ip, $user, $pass)){
 
 
-            for ($id=0; $id < $jumlah ; $id++) { 
-               
-            $API->comm('/ip/hotspot/user/add', array(
-              'name' => Str::random(4),
-              'password' => Str::random(4),
-              'profile' => $profile,
-              'limit-uptime' => $limit,
-              'comment' => $mitra,
-              'disabled' => 'true',
-            ));
+        for ($id=0; $id < $jumlah ; $id++) { 
+           
+        $API->comm('/ip/hotspot/user/add', array(
+          'name' => Str::random(4),
+          'password' => Str::random(4),
+          'profile' => $profile,
+          'limit-uptime' => $limit,
+          'comment' => $mitra,
+          'disabled' => 'true',
+        ));
 
-          }
+      }
 
-                  // $data = [
-                  //   'add' => $add
-                  // ];
+      return redirect('/pemesanan')->with('success','Generate Voucher berhasil');
 
-                  // dd($data);
-
-          return redirect('/pemesanan')->with('success','Generate Voucher berhasil');
-
-          }else{
-            return redirect('failed');
-        }
+      }else{
+        return redirect('failed');
     }
+}
+
 
     //Update
     public function UploadGambar(Request $request, $id){

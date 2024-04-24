@@ -1,4 +1,4 @@
- @extends('layout.master')
+@extends('layout.supermaster')
  @section('title','Gmedia.Net - Mitra')
  @section('content')
 
@@ -32,16 +32,8 @@
                         <form action="{{ route('addmitra.post') }}" method="POST" >
                             @csrf 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="address" placeholder="Masukkan ip_address" required >
-                                <label class="form-label">Address</label>
-                            </div>
-                            <div class="form-floating mb-3">
                                 <input type="email" class="form-control" name="email" placeholder="Masukkan email" required >
                                 <label class="form-label">Email</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="username" placeholder="Masukkan user" required >
-                                <label class="form-label">Username</label>
                             </div>
                             <div class="form-floating mb-3"> 
                                 <input type="text" class="form-control" name="password" placeholder="Masukkan password" required>
@@ -79,9 +71,7 @@
 	                            <thead>
 								    <tr align="center">
 								        <th>No</th>
-								        <th>IP Address</th>
 								        <th>Email</th>
-								        <th>Username</th>
                                         <th>Level</th>
 								        <th>Action</th>
 								    </tr>
@@ -91,9 +81,7 @@
                                         <tr>
                                             <div hidden> {{ $item->id }} </div>
                                             <td> {{ $no + 1 }} </td> 
-                                            <td> {{ $item->address }} </td>                     
                                             <td> {{ $item->email }} </td>                     
-                                            <td> {{ $item->username }} </td>
                                             <td> {{ $item->level}} </td>
                                             <td>
                                                 <div class="form-button-action">
@@ -122,19 +110,11 @@
                             <!--  Form Edit -->
 
                               <div class="modal-body">
-                                <form action="{{ route('ubah',  $item->id) }}" method="POST" >
+                                <form action="{{ route('mitra.edit', $item->id) }}" method="POST" >
                                 @csrf 
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="address" value="{{ $item -> address }}" placeholder="Masukkan user" required>
-                                        <label class="form-label" for="user">Address</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="email" class="form-control" name="email" value="{{ $item -> address }}" placeholder="Masukkan email" required>
+                                        <input type="email" class="form-control" name="email" value="{{ $item -> email }}" placeholder="Masukkan email" required>
                                         <label class="form-label" for="user">Email</label>
-                                    </div>
-                                    <div class="form-floating mb-3"> 
-                                        <input type="text" class="form-control" name="username" value="{{ $item -> username }}" placeholder="Masukkan username" required>
-                                        <label class="form-label">Username</label>
                                     </div>
                                     <div class="form-floating mb-3"> 
                                         <select class="form-control" name="level" placeholder="level" required>

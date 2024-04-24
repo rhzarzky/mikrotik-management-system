@@ -64,7 +64,7 @@
                                         <tr>
                                             <div hidden> {{ $item->id }} </div>
                                             <td> {{ $kounter }} </td>  
-                                            <td> {{ $item->User->username }} </td>                     
+                                            <td> {{ $item->Router->username }} </td>                     
                                             <td> {{ $item->profile }} </td>
                                             <td> {{ $item->limit }} </td>
                                             <td> {{ $item->jumlah }} </td>
@@ -128,11 +128,11 @@
                                         @endphp
                                         @endif
 
-                                        @if($item->User->username == auth()->user()->username)
+                                        @if(Auth::check() && Auth::user()->level == 'mitra')
                                         <tr>
                                             <div hidden> {{ $item->id }} </div>
                                             <td> {{ $kounter }} </td>  
-                                            <td> {{ $item->User->username }} </td>                     
+                                            <td> {{ $item->Router->username }} </td>                     
                                             <td> {{ $item->profile }} </td>
                                             <td> {{ $item->limit }} </td>
                                             <td> {{ $item->jumlah }} </td>
@@ -230,6 +230,55 @@
                                                 </script>
                                                 <!--   Disable Button -->
                                             </td>
+                                            <!-- Modal Edit Pemesanan -->
+                                            <div class="modal fade" id="edit{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Pemesanan</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Form Edit -->
+                                                            <form action="{{ route('pemesanan.edit', $item->id) }}" method="POST">
+                                                                @csrf 
+                                                                <!-- Profile -->
+                                                                <div class="form-floating mb-3">
+                                                                    <select class="form-control" name="profile" placeholder="Masukkan profile" required>
+                                                                        <option value="">--Pilih Paket--</option>
+                                                                        <option value="Streaming" {{ $item->profile == 'Streaming' ? 'selected' : '' }}>Streaming</option>
+                                                                        <option value="Social Media" {{ $item->profile == 'Social Media' ? 'selected' : '' }}>Social Media</option>
+                                                                        <option value="Lainnya" {{ $item->profile == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                                                    </select>
+                                                                    <label class="form-label">Paket</label>
+                                                                </div>
+                                                                <!-- Limit -->
+                                                                <div class="form-floating mb-3">
+                                                                    <select class="form-control" name="limit" placeholder="Masukkan timelimit" required>
+                                                                        <option value="">--Pilih Waktu--</option>
+                                                                        <option value="6h" {{ $item->limit == '6h' ? 'selected' : '' }}>6 Jam</option>
+                                                                        <option value="12h" {{ $item->limit == '12h' ? 'selected' : '' }}>12 Jam</option>
+                                                                        <option value="1d" {{ $item->limit == '1d' ? 'selected' : '' }}>1 Hari</option>
+                                                                    </select>
+                                                                    <label class="form-label">Durasi</label>
+                                                                </div>
+                                                                <!-- Jumlah -->
+                                                                <div class="form-floating mb-3">
+                                                                    <input type="number" class="form-control" name="jumlah" value="{{ $item->jumlah }}" placeholder="Masukkan Qty" required>
+                                                                    <label class="form-label" for="jumlah">Qty</label>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary">Ubah</button>
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                </div>
+                                                            </form>
+                                                            <!-- Akhir Form -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal Edit Pemesanan -->
+
                                         </tr> 
                                     @php
                                         $kounter++;

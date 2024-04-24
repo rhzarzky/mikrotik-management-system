@@ -23,7 +23,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="profileDropdown">
                         <!-- Tautan untuk Dashboard -->
-                        <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                        <a class="dropdown-item" href="{{ route('router') }}">Dashboard</a>
                         <!-- Form untuk Logout -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
