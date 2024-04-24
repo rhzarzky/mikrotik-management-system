@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // Tambahkan data pengguna
         User::create([
-            'address' => '10.109.0.191',
+            'address' => '192.1168.1.15',
             'email' => 'admin@admin.com',
             'username' => 'admin',
             'password' => Hash::make('admin'),
