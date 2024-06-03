@@ -1,1 +1,0 @@
-import{x as s,a4 as t,y as a,q as e}from"./main-BvnZqWmd.js";const i="/build/assets/avatar-1-CxOKCzdw.png";function u(){const o=s(!1);return t(()=>{window.requestAnimationFrame(()=>{o.value=!0})}),{ssrBootStyles:a(()=>o.value?void 0:{transition:"none !important"}),isBooted:e(o)}}export{i as a,u};
