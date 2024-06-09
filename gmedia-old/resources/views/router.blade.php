@@ -75,7 +75,6 @@
                                  <th>Email</th>
                                  <th>IP Address</th>
                                  <th>Username</th>
-                                 <th>Password</th>
                                  <th>Action</th>
                              </tr>
                          </thead>
@@ -88,7 +87,6 @@
                                  <td> {{ $item->user->email }} </td>
                                  <td> {{ $item->address }} </td>
                                  <td> {{ $item->username }} </td>
-                                 <td> {{ $item->password }} </td>
                                  <td>
                                      <div class="form-button-action">
                                          <!-- Button login -->

@@ -36,7 +36,7 @@
                                 <label class="form-label">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="name" placeholder="Masukkan name" required >
+                                <input type="text" class="form-control" name="name" placeholder="Masukkan nama" required >
                                 <label class="form-label">Name</label>
                             </div>
                             <div class="form-floating mb-3"> 
@@ -121,6 +121,10 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" name="email" value="{{ $item -> email }}" placeholder="Masukkan email" required>
                                         <label class="form-label" for="user">Email</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="name" value="{{ $item -> name }}" placeholder="Masukkan nama" required >
+                                        <label class="form-label">Name</label>
                                     </div>
                                     <div class="form-floating mb-3"> 
                                         <select class="form-control" name="level" placeholder="level" required>

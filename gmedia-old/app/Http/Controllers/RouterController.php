@@ -33,27 +33,31 @@ class RouterController extends Controller
         return view('router', ['datausers' => $routers]);    
     }
 
-    public function addrouter(Request $request){
+
+    public function addrouter(Request $request) {
         // Validasi data yang diterima dari formulir
         $validasi = $request->validate([
             'address' => 'required',
-            'name'=> 'required',
-            'username'=> 'required',
-            'password' =>'required',
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
         ]);
+
+        // Enkripsi password sebelum disimpan
+        $validasi['password'] = Crypt::encryptString($validasi['password']);
 
         // Ambil ID pengguna yang saat ini login
         $userId = Auth::id();
 
         // Tambahkan user_id ke dalam array validasi
         $validasi['user_id'] = $userId;
-        
+    
         // Tambahkan user ke tabel pengguna
         try {
             router::create($validasi);
-            return redirect('router')->with('success','Router berhasil ditambahkan');
+            return redirect('router')->with('success', 'Router berhasil ditambahkan');
         } catch (\Exception $e) {
-            return redirect('router')->with('error','Gagal menambahkan Router: '.$e->getMessage());
+            return redirect('router')->with('error', 'Gagal menambahkan Router: ' . $e->getMessage());
         }
     }
 
@@ -64,15 +68,39 @@ class RouterController extends Controller
         $item->name = $request->name;
         $item->address = $request->address;
         $item->username = $request->username;
+
         // Periksa apakah password disediakan dalam permintaan
         if ($request->filled('password')) {
-            // Enkripsi kata sandi sebelum menyimpannya ke dalam basis data
-            $item->password = $request->password;
+            try {
+                // Dekripsi password yang tersimpan di database
+                $decryptedPassword = Crypt::decryptString($item->password);
+                // Enkripsi password baru sebelum menyimpannya ke dalam basis data
+                $item->password = Crypt::encryptString($request->password);
+            } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+                // Handle dekripsi yang gagal, misalnya jika password tidak terenkripsi
+                return redirect()->back()->with('error', 'Gagal mendekripsi password');
+            }
         }
+
         $item->save();
 
         return redirect('/router')->with('success', 'Data berhasil diubah');
     }
+    // public function ubah(Request $request, $id)
+    // {
+    //     $item = router::find($id);
+    //     $item->name = $request->name;
+    //     $item->address = $request->address;
+    //     $item->username = $request->username;
+    //     // Periksa apakah password disediakan dalam permintaan
+    //     if ($request->filled('password')) {
+    //         // Enkripsi kata sandi sebelum menyimpannya ke dalam basis data
+    //         $item->password = $request->password;
+    //     }
+    //     $item->save();
+
+    //     return redirect('/router')->with('success', 'Data berhasil diubah');
+    // }
 
     //delete
     public function deleteRouter($id){

@@ -47,6 +47,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->email = $request->email;
+        $user->name = $request->name;
         $user->level = $request->level;
         $user->update();
 
