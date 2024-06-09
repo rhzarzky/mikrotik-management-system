@@ -59,6 +59,7 @@ const desserts = [
         </th>
       </tr>
     </thead>
+    
     <tbody>
       <tr
         v-for="item in desserts"

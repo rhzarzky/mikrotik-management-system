@@ -5,12 +5,7 @@ import UserActiveTable from '@/views/pages/tables/UserActiveTable.vue'
 
 <template>
   <VRow>
-    <VCol cols="12">
-      <VCard title="User Active">
-        <UserActiveTable />
-      </VCard>
-    </VCol>
-    
+
     <VCol cols="12">
       <VCard title="User List">
         <UserTable />
