@@ -2,6 +2,7 @@
 
 use App\Http\controllers\AuthController;
 use App\Http\controllers\DashboardController;
+use App\Http\Controllers\FileController;
 use App\Http\controllers\HostpotController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\RouterController;
@@ -78,3 +79,10 @@ Route::get('router', [RouterController::class, 'router'])->name('router');
 Route::post('router', [RouterController::class, 'addrouter'])->name('addrouter.post');
 Route::post('/router/edit/{id}', [RouterController::class, 'ubah'])->name('router.edit');
 Route::get('/router/delete/{id}', [RouterController::class, 'deleteRouter'])->name('deleteRouter');
+
+//File Page
+Route::get('/file', [FileController::class, 'file'])->name('file');
+Route::post('/file/add', [FileController::class, 'addfile'])->name('addfile.post');
+Route::post('/file/edit', [FileController::class, 'editfile'])->name('editfile.post');
+Route::get('/file/delete/{id}', [FileController::class, 'deletefile'])->name('deletefile');
+

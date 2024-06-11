@@ -86,21 +86,6 @@ class RouterController extends Controller
 
         return redirect('/router')->with('success', 'Data berhasil diubah');
     }
-    // public function ubah(Request $request, $id)
-    // {
-    //     $item = router::find($id);
-    //     $item->name = $request->name;
-    //     $item->address = $request->address;
-    //     $item->username = $request->username;
-    //     // Periksa apakah password disediakan dalam permintaan
-    //     if ($request->filled('password')) {
-    //         // Enkripsi kata sandi sebelum menyimpannya ke dalam basis data
-    //         $item->password = $request->password;
-    //     }
-    //     $item->save();
-
-    //     return redirect('/router')->with('success', 'Data berhasil diubah');
-    // }
 
     //delete
     public function deleteRouter($id){
@@ -109,5 +94,4 @@ class RouterController extends Controller
 
         return redirect('/router');
     }
-
 }

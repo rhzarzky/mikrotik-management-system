@@ -5,7 +5,6 @@ use App\Models\RouterosAPI;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class HostpotController extends Controller
 {
@@ -86,7 +85,7 @@ class HostpotController extends Controller
                
             }
 
-          // dd($data);
+            //dd($data);
 
     		return redirect('/hotspot/voucher')->with('success','Voucher berhasil dibuat');
 

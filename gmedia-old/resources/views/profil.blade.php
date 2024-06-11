@@ -118,7 +118,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
-                                <!--  Form add -->
+                                <!--  Form edit -->
                                         <form action="{{ route('updateprofile.post') }}" method="POST" >
                                         @csrf
                                             <div class="form-floating mb-3">

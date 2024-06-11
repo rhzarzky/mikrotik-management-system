@@ -68,6 +68,11 @@
                             <a class="nav-link" href="{{ route('active') }}">Status</a>
                         </nav>
                     </div>
+                    
+                    <a class="nav-link" href="{{ route('file') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
+                        Edit Login Page
+                    </a>
 
                     <a class="nav-link" href="{{ route('router') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div>
