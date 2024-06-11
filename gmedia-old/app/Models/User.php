@@ -25,14 +25,6 @@ class User extends Authenticatable
         'level',
     ];
 
-    public function pemesanan(){
-        return $this->hasMany('App\Models\pemesanan');
-    }
-
-    public function transaksi(){
-        return $this->hasMany('App\Models\transaksi');
-    }
-
     /**
      * The attributes that should be hidden for serialization.
      *
