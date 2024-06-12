@@ -55,9 +55,6 @@ class FileController extends Controller
 		}
 	}
 
-    	
-
-
      //delete file
 
 	public function deletefile($id){

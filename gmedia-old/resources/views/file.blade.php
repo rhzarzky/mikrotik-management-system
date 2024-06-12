@@ -52,8 +52,8 @@
 
                            <!-- Modal edit-->
                             <div class="modal fade" id="edit{{$id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
+                                <div class="modal-dialog" alig>
+                                    <div class="modal-content" style="overflow: auto; resize: both;">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Edit File</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -65,7 +65,7 @@
                                                 <div class="form-floating mb-3">
                                                     <input type="hidden" value="<?= $data['.id'] ?>" name="id">
                                                     <!-- Ubah input menjadi textarea -->
-                                                    <textarea class="form-control" name="contents" rows="5" style="height:400px; overflow-y: auto;" required placeholder="Contents">{{ $data['contents'] ?? '' }}</textarea>
+                                                    <textarea class="form-control" name="contents" style="height:300px; overflow: auto; resize: both;" required placeholder="Contents">{{ $data['contents'] ?? '' }}</textarea>
                                                     <label class="form-label">Contents</label>
                                                 </div>
                                         </div>
@@ -79,6 +79,7 @@
                                 </div>
                             </div>
                             <!--  close modal edit-->
+
 
 
 
