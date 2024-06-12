@@ -50,36 +50,37 @@
                                     </tr>
 
 
-                            <!-- Modal edit-->
-
-                                <div class="modal fade" id="edit{{$id}}" tabindex="-1" aria-labelledby="exampleModalLabel" 
-                                    aria-hidden="true">
-                                  <div class="modal-dialog">
+                           <!-- Modal edit-->
+                            <div class="modal fade" id="edit{{$id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
                                     <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit File</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                      </div>
-                                      <div class="modal-body">
-                                <!--  Form edit -->
-                                        <form action="{{ route('editfile.post') }}" method="POST" >
-                                        @csrf
-                                            <div class="form-floating mb-3">
-                                                <input type="hidden" value="<?= $data['.id'] ?>" name="id">
-                                                <input type="text" class="form-control" name="contents" value="{{ $data['contents'] ?? '' }}" required placeholder="contents">
-                                                <label class="form-label">Contents</label>
-                                            </div>
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit File</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                      <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Ubah</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                      </div>
-                                    </form>
-                                    <!-- Akhir Form -->
+                                        <div class="modal-body">
+                                            <!--  Form edit -->
+                                            <form action="{{ route('editfile.post') }}" method="POST" >
+                                                @csrf
+                                                <div class="form-floating mb-3">
+                                                    <input type="hidden" value="<?= $data['.id'] ?>" name="id">
+                                                    <!-- Ubah input menjadi textarea -->
+                                                    <textarea class="form-control" name="contents" rows="5" style="height:400px; overflow-y: auto;" required placeholder="Contents">{{ $data['contents'] ?? '' }}</textarea>
+                                                    <label class="form-label">Contents</label>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Ubah</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        </div>
+                                        </form>
+                                        <!-- Akhir Form -->
                                     </div>
-                                  </div>
                                 </div>
-                           <!--  close modal edit-->
+                            </div>
+                            <!--  close modal edit-->
+
+
 
                                     @endforeach
                                 </tbody>
