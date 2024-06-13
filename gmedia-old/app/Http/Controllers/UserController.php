@@ -27,7 +27,7 @@ class UserController extends Controller
             'email' => 'required',
             'name' => 'required',
             'password' =>'required',
-            'level' => 'required'
+            'role' => 'required'
         ]);
 
         // Enkripsi kata sandi sebelum menyimpannya ke dalam basis data
@@ -48,7 +48,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->email = $request->email;
         $user->name = $request->name;
-        $user->level = $request->level;
+        $user->role = $request->role;
         $user->update();
 
         return redirect('/user')->with('success','Data berhasil diubah');

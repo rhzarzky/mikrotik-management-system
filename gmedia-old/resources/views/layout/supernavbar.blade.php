@@ -47,7 +47,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div>
                         Router
                     </a>
-                    @if(Auth::check() && Auth::user()->level == 'admin')
+                    @if(Auth::check() && Auth::user()->role == 'admin')
                     <a class="nav-link" href="{{ route('user') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-people-group"></i></div>
                         User

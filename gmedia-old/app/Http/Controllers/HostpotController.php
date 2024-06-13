@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\RouterosAPI;
 use App\Models\User;
+use App\Models\Router;
+use App\Models\router as ModelsRouter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -22,10 +24,10 @@ class HostpotController extends Controller
         $profile = $API->comm('/ip/hotspot/user/profile/print');
 
         //User berdasrkan ID
-            $item = user::all();
+            $item = router::all();
 
             foreach ($item as $item1) {
-                if ($item1->username == auth()->user()->username) {
+                if ($item1->username) {
                     $item1->id;
              
                     $data = [
@@ -58,10 +60,10 @@ class HostpotController extends Controller
     	if ($API->connect($ip, $user, $pass)){
 
          //User berdasarkan ID
-            $item = user::all();
+            $item = router::all();
             
             foreach ($item as $item1) {
-                if ($item1->username == auth()->user()->username) {
+                if ($item1->username) {
                     $item1->id;
               
 
@@ -115,10 +117,10 @@ class HostpotController extends Controller
                 }
 
             //User berdasrkan ID
-                $item = user::all();
+                $item = router::all();
                 
                 foreach ($item as $item1) {
-                    if ($item1->username == auth()->user()->username) {
+                    if ($item1->username) {
                     $item1->id;
 
                 for ($id=0; $id < $request['jum'] ; $id++) { 
@@ -156,10 +158,10 @@ class HostpotController extends Controller
         if($API->connect($ip, $user, $pass)){
 
              //User berdasrkan ID
-                $item = user::all();
+                $item = router::all();
                 
                 foreach ($item as $item1) {
-                    if ($item1->username == auth()->user()->username) {
+                    if ($item1->username) {
                     $item1->id;
 
             $API->comm("/ip/hotspot/user/set", [
@@ -414,35 +416,6 @@ class HostpotController extends Controller
         }
     }
 
-
-//Scheduler Voucher
-
-    public function scheduler(){
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
-        $API = new RouterosAPI();
-        $API->debug = false;
-
-        if ($API->connect($ip, $user, $pass)) {
-
-            $scheduler = $API->comm('/system/scheduler/print');
-
-            $data = [
-                // 'totalhotspotactive' => count($hotspotactive),
-                'scheduler' => $scheduler,
-                // 'time' => $active['session-time-left'],
-            ];
-
-            // dd($data);
-            
-            return view('scheduler', $data);
-
-        } else {
-
-            return redirect('failed');
-        }
-    }
 
 
     public function time(){

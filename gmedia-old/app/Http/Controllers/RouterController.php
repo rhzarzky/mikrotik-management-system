@@ -19,11 +19,11 @@ class RouterController extends Controller
         // Ambil ID pengguna yang saat ini login
         $userId = Auth::id();
     
-        // Periksa apakah pengguna memiliki level admin
-        $userLevel = Auth::user()->level;
+        // Periksa apakah pengguna memiliki role admin
+        $userLevel = Auth::user()->role;
     
         if ($userLevel == 'admin') {
-            // Jika pengguna memiliki level admin, ambil semua router
+            // Jika pengguna memiliki role admin, ambil semua router
             $routers = Router::all();
         } else {
             // Jika tidak, ambil daftar router yang terkait dengan pengguna yang login
