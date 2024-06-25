@@ -13,7 +13,6 @@ class LoginPageController extends Controller
     {
         $loginPage = LoginPage::first();
         return view('login-page', compact('loginPage'));
-        // apa
     }
 
     public function store(Request $request)
