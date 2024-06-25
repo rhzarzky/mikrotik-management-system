@@ -91,9 +91,8 @@
 </script>
 
 <!-- SweetAlert Profile -->
-
 <script type="text/javascript">
-  $(function(deleteprofile) {
+  $(document).ready(function() {
     $(document).on('click', '#deleteprofile', function(e) {
       e.preventDefault();
       var deleteprofile = $(this).attr('href');
@@ -110,60 +109,17 @@
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
-            url: destroy_,
+            url: deleteprofile,
             type: 'GET',
             data: {
               "_token": "{{ csrf_token() }}",
             },
             success: function(response) {
               // Tampilkan pesan sukses jika item berhasil dihapus
-              Swal.fire("Sukses", "Item berhasil dihapus.", "success");
-
-              // Lakukan refresh atau manipulasi tampilan sesuai kebutuhan 
-              window.location = "/hotspot/profile"
-            },
-            error: function(xhr) {
-              // Tampilkan pesan error jika terjadi kesalahan
-              Swal.fire("Error", "Terjadi kesalahan saat menghapus item.", "error");
-            }
-          });
-        }
-      })
-    });
-  });
-</script>
-
-<!-- SweetAlert Transaksi -->
-
-<script type="text/javascript">
-  $(function(deletetransaksi) {
-    $(document).on('click', '#deletetransaksi', function(e) {
-      e.preventDefault();
-      var deletedtransaksi = $(this).attr('href');
-      var nama = $(this).attr('data-nama');
-      Swal.fire({
-        title: 'Konfirmasi?',
-        text: "Apakah Anda yakin ingin menghapus " + nama + " ?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $.ajax({
-            url: deletedtransaksi,
-            type: 'GET',
-            data: {
-              "_token": "{{ csrf_token() }}",
-            },
-            success: function(response) {
-              // Tampilkan pesan sukses jika item berhasil dihapus
-              Swal.fire("Sukses", "Item berhasil dihapus.", "success");
-
-              // Lakukan refresh atau manipulasi tampilan sesuai kebutuhan 
-              window.location = "/transaksi"
+              Swal.fire("Sukses", "Item berhasil dihapus.", "success").then(() => {
+                // Lakukan refresh atau manipulasi tampilan sesuai kebutuhan 
+                window.location.reload();
+              });
             },
             error: function(xhr) {
               // Tampilkan pesan error jika terjadi kesalahan
@@ -219,13 +175,12 @@
   });
 </script>
 
-<!-- SweetAlert Pemesanan -->
-
+<!-- SweetAlert Router -->
 <script type="text/javascript">
-  $(function(del_pemesanan) {
-    $(document).on('click', '#del_pemesanan', function(e) {
+  $(document).ready(function() {
+    $(document).on('click', '#deleterouter', function(e) {
       e.preventDefault();
-      var del_pemesanan = $(this).attr('href');
+      var deletedrouter = $(this).attr('href');
       var nama = $(this).attr('data-nama');
       Swal.fire({
         title: 'Konfirmasi?',
@@ -239,17 +194,17 @@
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
-            url: del_pemesanan,
+            url: deletedrouter,
             type: 'GET',
             data: {
               "_token": "{{ csrf_token() }}",
             },
             success: function(response) {
               // Tampilkan pesan sukses jika item berhasil dihapus
-              Swal.fire("Sukses", "Item berhasil dihapus.", "success");
-
-              // Lakukan refresh atau manipulasi tampilan sesuai kebutuhan 
-              window.location = "/pemesanan"
+              Swal.fire("Sukses", "Item berhasil dihapus.", "success").then(() => {
+                // Refresh atau manipulasi tampilan sesuai kebutuhan
+                window.location.reload();
+              });
             },
             error: function(xhr) {
               // Tampilkan pesan error jika terjadi kesalahan

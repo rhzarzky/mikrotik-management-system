@@ -100,7 +100,7 @@
                                          </a>
 
                                          <!-- Button hapus -->
-                                         <a href="{{ route('deleteRouter', $item->id) }}" class="btn btn-link btn-lg" id="deleterouter" data-nama="{{ $item->username }}">
+                                         <a href="{{ route('deleteRouter', $item->id) }}" class="btn btn-link btn-lg" id="deleterouter" data-nama="{{ $item->name }}">
                                              <i class="fa fa-times"></i>
                                          </a>
                                      </div>

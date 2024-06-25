@@ -378,7 +378,7 @@ class HostpotController extends Controller
 		if ($API->connect($ip, $user, $pass)) {
 
 			$API->comm('/ip/hotspot/user/profile/remove', [
-				'.id' => '*' . $id
+				'.id' => '*' . $id,
 			]);
 			
 			return redirect('/hotspot/profile');
