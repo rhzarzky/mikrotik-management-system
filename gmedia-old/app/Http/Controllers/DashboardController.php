@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\RouterosAPI;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -57,7 +56,7 @@ class DashboardController extends Controller
         return view('dashboard', $data);
     }
 
-     public function cpu()
+    public function cpu()
     {
         $ip = session()->get('ip');
         $user = session()->get('user');

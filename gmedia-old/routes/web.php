@@ -11,6 +11,8 @@ use App\Http\controllers\TrafficController;
 use App\Http\controllers\LandingController;
 use App\Http\controllers\PemesananController;
 use App\Http\Controllers\InterfaceController;
+use App\Http\Controllers\LoginPageController;
+use App\Http\Controllers\FileTransferController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,3 +88,11 @@ Route::post('/file/add', [FileController::class, 'addfile'])->name('addfile.post
 Route::post('/file/edit', [FileController::class, 'editfile'])->name('editfile.post');
 Route::get('/file/delete/{id}', [FileController::class, 'deletefile'])->name('deletefile');
 
+//login page
+Route::get('/login-page', [LoginPageController::class, 'index'])->name('login-page');
+Route::post('/login-page', [LoginPageController::class, 'store'])->name('login-page.store');
+Route::post('/execute-command', [LoginPageController::class, 'executeCommand'])->name('execute-command');
+
+//manage mikrotik
+Route::get('/file-transfer', [FileTransferController::class, 'index'])->name('file.transfer');
+Route::post('/file-transfer/upload', [FileTransferController::class, 'upload'])->name('file.transfer.upload');

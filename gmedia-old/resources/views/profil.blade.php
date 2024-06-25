@@ -42,8 +42,8 @@
                                 <select class="form-control" name="ratelimit" placeholder="Masukkan ratelimit" required>
                                     <option disabled selected>--Pilih rate-limit--</option>
                                     <option value= " "> unlimited </option>           
-<!--                                     <option value="512k/512k"> 512k/512k </option>
-                                    <option value="512k/1M"> 512k/1M </option> -->
+                                    <option value="512k/512k"> 512k/512k </option>
+                                    <option value="512k/1M"> 512k/1M </option>
                                     <option value="1M/1M"> 1M/1M </option>
                                     <option value= "2M/1M"> 2M/1M </option>
                                     <option value= "2M/2M"> 2M/2M </option>
@@ -136,9 +136,8 @@
                                                     <option disabled selected>--Pilih rate-limit--</option>
                                                     @if ($pilihan = $data['rate-limit'] ?? 'unlimited' )
                                                     <option value=" " <?= ( $pilihan == 'unlimited') ? "selected": "" ?>> unlimited </option> 
-<!--                                                     <option value="512k/512k" <?= ( $pilihan == '512k/512k') ? "selected": "" ?>> 
-                                                    512k/512k </option>
-                                                    <option value="512k/1M" <?= ( $pilihan == '512k/1M') ? "selected": "" ?>> 512k/1M </option> -->
+                                                    <option value="512k/512k" <?= ( $pilihan == '512k/512k') ? "selected": "" ?>> 512k/512k </option>
+                                                    <option value="512k/1M" <?= ( $pilihan == '512k/1M') ? "selected": "" ?>> 512k/1M </option>
                                                     <option value="1M/1M" <?= ( $pilihan == '1M/1M') ? "selected": "" ?>> 1M/1M </option>
                                                     <option value="2M/1M" <?= ( $pilihan == '2M/1M') ? "selected": "" ?>> 2M/1M </option>
                                                     <option value="2M/2M" <?= ( $pilihan == '2M/2M') ? "selected": "" ?>> 2M/2M </option>

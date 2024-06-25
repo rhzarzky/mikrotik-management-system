@@ -235,6 +235,14 @@
                                         </div>
                                     </div><br>
 
+                        <!--   Tata cara transaksi -->
+                                    <b class="form-text">PERHATIAN !!
+                                        <ul>
+                                            <li>Cetak dulu voucher sebelum disimpan</li>
+                                            <li>Klik save untuk menyimpan</li>
+                                        </ul>
+                                    </b>
+                        <!--   Tata cara transaksi -->
 
                                 </div>
                                     <div class="modal-footer">

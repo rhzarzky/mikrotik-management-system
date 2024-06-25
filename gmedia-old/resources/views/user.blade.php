@@ -44,7 +44,7 @@
                                 <label class="form-label">Password</label>
                             </div>
                             <div class="form-floating mb-3">
-                                 <select class="form-control" name="role" placeholder="role" required>
+                                 <select class="form-control" name="level" placeholder="level" required>
                                     <option disabled selected required>--Pilih Role--</option>
                                     <option value="admin"> Admin </option>   
                                     <option value="user"> User </option>
@@ -88,7 +88,7 @@
                                             <td> {{ $no + 1 }} </td> 
                                             <td> {{ $item->name}} </td>  
                                             <td> {{ $item->email }} </td>                     
-                                            <td> {{ $item->role}} </td>
+                                            <td> {{ $item->level}} </td>
                                             <td>
                                                 <div class="form-button-action">
                                         <!-- button edit -->
@@ -127,12 +127,12 @@
                                         <label class="form-label">Name</label>
                                     </div>
                                     <div class="form-floating mb-3"> 
-                                        <select class="form-control" name="role" placeholder="role" required>
+                                        <select class="form-control" name="level" placeholder="level" required>
                                             <option disabled selected required>--Pilih Role--</option>
-                                                @if ( $item -> role == "admin")
+                                                @if ( $item -> level == "admin")
                                                     <option value="admin" selected>Admin</option>
                                                     <option value="user">User</option>
-                                                @elseif($item -> role == "user")
+                                                @elseif($item -> level == "user")
                                                     <option value="admin">Admin</option>
                                                     <option value="user" selected>User</option>
                                                 @endif
