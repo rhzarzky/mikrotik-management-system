@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\RouterosAPI;
 use App\Models\User;
+use App\Models\Router;
+use App\Models\router as ModelsRouter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 
 class HostpotController extends Controller
 {
@@ -21,11 +25,11 @@ class HostpotController extends Controller
         $hotspotuser = $API->comm('/ip/hotspot/user/print');
         $profile = $API->comm('/ip/hotspot/user/profile/print');
 
-        //User berdasrkan ID
-            $item = user::all();
+        //voucher berdasarkan router
+            $item = router::all();
 
             foreach ($item as $item1) {
-                if ($item1->username == auth()->user()->username) {
+                if ($item1->username) {
                     $item1->id;
              
                     $data = [
@@ -57,11 +61,11 @@ class HostpotController extends Controller
 
     	if ($API->connect($ip, $user, $pass)){
 
-         //User berdasarkan ID
-            $item = user::all();
+        //voucher berdasarkan router
+            $item = router::all();
             
             foreach ($item as $item1) {
-                if ($item1->username == auth()->user()->username) {
+                if ($item1->username) {
                     $item1->id;
               
 
@@ -114,11 +118,11 @@ class HostpotController extends Controller
                     $timelimit = $request['timelimit'];
                 }
 
-            //User berdasrkan ID
-                $item = user::all();
+            //voucher berdasarkan router
+                $item = router::all();
                 
                 foreach ($item as $item1) {
-                    if ($item1->username == auth()->user()->username) {
+                    if ($item1->username) {
                     $item1->id;
 
                 for ($id=0; $id < $request['jum'] ; $id++) { 
@@ -155,11 +159,11 @@ class HostpotController extends Controller
 
         if($API->connect($ip, $user, $pass)){
 
-             //User berdasrkan ID
-                $item = user::all();
+             //voucher berdasarkan router
+                $item = router::all();
                 
                 foreach ($item as $item1) {
-                    if ($item1->username == auth()->user()->username) {
+                    if ($item1->username) {
                     $item1->id;
 
             $API->comm("/ip/hotspot/user/set", [
