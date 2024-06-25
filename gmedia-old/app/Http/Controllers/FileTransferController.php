@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use phpseclib3\Net\SFTP;
 use Illuminate\Support\Facades\Session;

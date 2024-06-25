@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="destination">Destination</label>
-                        <input type="text" name="destination" class="form-control" placeholder="e.g. /flash/yourfile.txt" required>
+                        <input type="text" name="destination" class="form-control" placeholder="e.g. /directory/yourfile.html" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload</button>
                 </form>

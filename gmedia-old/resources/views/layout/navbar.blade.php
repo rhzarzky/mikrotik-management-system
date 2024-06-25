@@ -76,7 +76,7 @@
 
                     <a class="nav-link" href="{{ route('file.transfer') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
-                        manage mikrotik
+                        Upload File mikrotik
                     </a>
 
                     <a class="nav-link" href="{{ route('router') }}">

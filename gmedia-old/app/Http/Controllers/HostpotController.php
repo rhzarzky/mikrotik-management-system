@@ -415,36 +415,6 @@ class HostpotController extends Controller
     }
 
 
-//Scheduler Voucher
-
-    public function scheduler(){
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
-        $API = new RouterosAPI();
-        $API->debug = false;
-
-        if ($API->connect($ip, $user, $pass)) {
-
-            $scheduler = $API->comm('/system/scheduler/print');
-
-            $data = [
-                // 'totalhotspotactive' => count($hotspotactive),
-                'scheduler' => $scheduler,
-                // 'time' => $active['session-time-left'],
-            ];
-
-            // dd($data);
-            
-            return view('scheduler', $data);
-
-        } else {
-
-            return redirect('failed');
-        }
-    }
-
-
     public function time(){
         $ip = session()->get('ip');
         $user = session()->get('user');
