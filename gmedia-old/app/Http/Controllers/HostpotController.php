@@ -26,7 +26,7 @@ class HostpotController extends Controller
         $profile = $API->comm('/ip/hotspot/user/profile/print');
 
         //voucher berdasarkan router
-            $item = router::all();
+            $item = Router::all();
 
             foreach ($item as $item1) {
                 if ($item1->username) {
@@ -62,7 +62,7 @@ class HostpotController extends Controller
     	if ($API->connect($ip, $user, $pass)){
 
         //voucher berdasarkan router
-            $item = router::all();
+            $item = Router::all();
             
             foreach ($item as $item1) {
                 if ($item1->username) {
@@ -119,7 +119,7 @@ class HostpotController extends Controller
                 }
 
             //voucher berdasarkan router
-                $item = router::all();
+                $item = Router::all();
                 
                 foreach ($item as $item1) {
                     if ($item1->username) {
@@ -160,7 +160,7 @@ class HostpotController extends Controller
         if($API->connect($ip, $user, $pass)){
 
              //voucher berdasarkan router
-                $item = router::all();
+                $item = Router::all();
                 
                 foreach ($item as $item1) {
                     if ($item1->username) {
