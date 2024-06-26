@@ -6,10 +6,6 @@ use App\Http\Controllers\FileController;
 use App\Http\controllers\HostpotController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\RouterController;
-use App\Http\controllers\TransaksiController;
-use App\Http\controllers\TrafficController;
-use App\Http\controllers\LandingController;
-use App\Http\controllers\PemesananController;
 use App\Http\Controllers\InterfaceController;
 use App\Http\Controllers\LoginPageController;
 use App\Http\Controllers\FileTransferController;
@@ -96,3 +92,5 @@ Route::post('/execute-command', [LoginPageController::class, 'executeCommand'])-
 //manage mikrotik
 Route::get('/file-transfer', [FileTransferController::class, 'index'])->name('file.transfer');
 Route::post('/file-transfer/upload', [FileTransferController::class, 'upload'])->name('file.transfer.upload');
+
+Route::get('/download-file', [FileController::class, 'downloadFile'])->name('downloadFile');
