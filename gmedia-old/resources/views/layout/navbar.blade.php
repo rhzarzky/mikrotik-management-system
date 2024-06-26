@@ -69,6 +69,11 @@
                         </nav>
                     </div>
                     
+                    <a class="nav-link" href="{{ route('file') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
+                        List File Mikrotik
+                    </a>
+
                     <a class="nav-link" href="{{ route('login-page') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                         Edit Login Page
@@ -76,7 +81,7 @@
 
                     <a class="nav-link" href="{{ route('file.transfer') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
-                        Upload File mikrotik
+                        Upload File Mikrotik
                     </a>
 
                     <a class="nav-link" href="{{ route('router') }}">

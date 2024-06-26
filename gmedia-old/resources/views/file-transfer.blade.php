@@ -8,7 +8,7 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Login Page</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Manage Page</li>
+                <li class="breadcrumb-item active">Manage File</li>
             </ol>
             <div class="container mt-5">
                 <h1>Upload File to MikroTik</h1>
