@@ -96,7 +96,7 @@ class FileController extends Controller
     
     public function downloadFile()
 {
-    $filePath = public_path('hotspot/login.html');
+    $filePath = public_path('storage/hotspot/login.html');
     
     return response()->download($filePath, 'login.html');
 }
