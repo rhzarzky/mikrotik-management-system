@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//login
+//login website
 Route::get('/', [AuthController::class, 'Index'])->name('landing-page.index');
 Route::get('login', [AuthController::class, 'Index'])->name('login');
 Route::get('loginAuth', [AuthController::class, 'loginAuth'])->name('loginAuth');
@@ -61,9 +61,6 @@ Route::get('/hotspot/profile/delete/{id}', [HostpotController::class, 'deletepro
 //Hotspot-active
 Route::get('/hotspot/status', [HostpotController::class, 'active'])->name('active');
 Route::get('/hotspot/status/active', [HostpotController::class, 'time'])->name('active.time');
-
-//Hotspot-scheduler
-Route::get('/hotspot/scheduler', [HostpotController::class, 'scheduler'])->name('scheduler');
 
 //User
 Route::get('user', [UserController::class, 'user'])->name('user');
