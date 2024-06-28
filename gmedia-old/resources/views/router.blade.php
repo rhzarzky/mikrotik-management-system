@@ -44,7 +44,7 @@
                                      <label class="form-label">Username</label>
                                  </div>
                                  <div class="form-floating mb-3">
-                                     <input type="text" class="form-control" name="password" placeholder="Masukkan password" required>
+                                     <input type="password" class="form-control" name="password" placeholder="Masukkan password" required>
                                      <label class="form-label">Password</label>
                                  </div>
                          </div>
@@ -131,7 +131,7 @@
                                                          <label class="form-label">Username</label>
                                                      </div>
                                                      <div class="form-floating mb-3">
-                                                         <input type="text" class="form-control" name="password" placeholder="Masukkan password baru">
+                                                         <input type="password" class="form-control" name="password" placeholder="Masukkan password baru">
                                                          <label class="form-label">Password</label>
                                                      </div>
                                                      <div class="modal-footer">
