@@ -91,3 +91,5 @@ Route::get('/file-transfer', [FileTransferController::class, 'index'])->name('fi
 Route::post('/file-transfer/upload', [FileTransferController::class, 'upload'])->name('file.transfer.upload');
 
 Route::get('/download-file', [FileController::class, 'downloadFile'])->name('downloadFile');
+Route::get('/edit-html', [FileController::class, 'show']);
+Route::post('/edit-html', [FileController::class, 'update']);

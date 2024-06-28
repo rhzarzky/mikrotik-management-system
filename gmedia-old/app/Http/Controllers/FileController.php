@@ -30,32 +30,6 @@ class FileController extends Controller
       
     }
     
-    // public function file() {
-    //     $ip = session()->get('ip');
-    //     $user = session()->get('user');
-    //     $pass = session()->get('pass');
-    //     $API = new RouterosAPI();
-    //     $API->debug = false;
-    
-    //     if ($API->connect($ip, $user, $pass)) {
-    //         $files = $API->comm('/file/print');
-    
-    //         // Retrieve contents of each file
-    //         foreach ($files as &$file) {
-    //             if (isset($file['.id'])) {
-    //                 $content = $API->comm('/file/print', [
-    //                     '.proplist' => 'contents',
-    //                     '.id' => $file['.id']
-    //                 ]);
-    //                 $file['contents'] = $content[0]['contents'] ?? '';
-    //             }
-    //         }
-    
-    //         return view('file', ['files' => $files]);
-    //     } else {
-    //         return redirect('failed');
-    //     }
-    // }
     
     public function editfile(Request $request) {
         $ip = session()->get('ip');
@@ -94,10 +68,12 @@ class FileController extends Controller
         }
     }
     
-    public function downloadFile()
-{
-    $filePath = public_path('storage/hotspot/login.html');
-    
-    return response()->download($filePath, 'login.html');
-}
+        public function downloadFile()
+    {
+        $filePath = public_path('hotspot/login.html');
+        
+        return response()->download($filePath, 'login.html');
+    }
+
+
 }
