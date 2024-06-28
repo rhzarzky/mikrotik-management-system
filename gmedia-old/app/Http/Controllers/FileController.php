@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\RouterosAPI;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FileController extends Controller
 {
@@ -71,9 +72,7 @@ class FileController extends Controller
         public function downloadFile()
     {
         $filePath = public_path('hotspot/login.html');
-        
         return response()->download($filePath, 'login.html');
     }
-
 
 }
