@@ -126,6 +126,10 @@
                                         <input type="text" class="form-control" name="name" value="{{ $item -> name }}" placeholder="Masukkan nama" required >
                                         <label class="form-label">Name</label>
                                     </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="password" class="form-control" name="password" placeholder="Masukkan password baru">
+                                        <label class="form-label">Password</label>
+                                    </div>
                                     <div class="form-floating mb-3"> 
                                         <select class="form-control" name="role" placeholder="role" required>
                                             <option disabled selected required>--Pilih Role--</option>

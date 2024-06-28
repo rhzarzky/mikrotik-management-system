@@ -22,7 +22,7 @@ class UserController extends Controller
     // Add User
     public function adduser(Request $request)
     {
-        // Validasi data yang diterima dari formulir
+        // Validasi data
         $validasi = $request->validate([
             'email' => 'required',
             'name' => 'required',
@@ -33,7 +33,6 @@ class UserController extends Controller
         // Enkripsi kata sandi sebelum menyimpannya ke dalam basis data
         $validasi['password'] = Hash::make($validasi['password']);
         
-        // Tambahkan user ke tabel pengguna
         try {
             User::create($validasi);
             return redirect('user')->with('success','User berhasil ditambahkan');
@@ -43,16 +42,33 @@ class UserController extends Controller
     }
 
     // Update User
-    public function ubah(Request $request, $id)
-    {
-        $user = User::find($id);
-        $user->email = $request->email;
-        $user->name = $request->name;
-        $user->role = $request->role;
-        $user->update();
-
-        return redirect('/user')->with('success','Data berhasil diubah');
+public function ubah(Request $request, $id)
+{
+    $user = User::find($id);
+    
+    $validasi = $request->validate([
+        'email' => 'required',
+        'name' => 'required',
+        'password' => 'nullable',
+        'role' => 'required'
+    ]);
+    
+    $user->email = $validasi['email'];
+    $user->name = $validasi['name'];
+    $user->role = $validasi['role'];
+    
+    // Check if password is provided, then hash and update it
+    if (!empty($validasi['password'])) {
+        $user->password = Hash::make($validasi['password']);
     }
+
+    try {
+        $user->save();
+        return redirect('/user')->with('success', 'Data berhasil diubah');
+    } catch (\Exception $e) {
+        return redirect('/user')->with('error', 'Gagal mengubah data user: '.$e->getMessage());
+    }
+}
 
     // Delete User
     public function deleteUser($id)
