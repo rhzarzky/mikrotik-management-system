@@ -7,36 +7,37 @@
     <main>
         <div class="container-fluid px-4">
             <h1 class="mt-4">Login Page</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Manage File</li>
-            </ol>
             <div class="container mt-5">
-                <h1>Upload File to MikroTik</h1>
+                <h2>Change Hotspot Login Page</h2>
 
                 @if(session('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success mt-4">
                         {{ session('success') }}
                     </div>
                 @endif
 
                 @if(session('error'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger mt-4">
                         {{ session('error') }}
                     </div>
                 @endif
 
-                <form action="{{ route('file.transfer.upload') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group mb-3">
-                        <label for="file">File</label>
-                        <input type="file" name="file" class="form-control" required>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <form action="{{ route('file.transfer.uploadpage1') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <button type="submit" class="btn btn-primary mb-3">Default Login Page</button>
+                        </form>
+                        <img src="{{ asset('assets/page1.jpg') }}" alt="Page 1 Preview" class="img-fluid">
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="destination">Destination</label>
-                        <input type="text" name="destination" class="form-control" placeholder="e.g. /directory/yourfile.html" required>
+                    <div class="col-md-6">
+                        <form action="{{ route('file.transfer.uploadpage2') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <button type="submit" class="btn btn-primary mb-3">Login Page 2</button>
+                        </form>
+                        <img src="{{ asset('assets/page2.jpg') }}" alt="Page 2 Preview" class="img-fluid">
                     </div>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                </form>
+                </div>
             </div>
         </div>
     </main>
