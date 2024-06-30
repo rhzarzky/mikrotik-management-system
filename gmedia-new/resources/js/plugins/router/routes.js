@@ -1,44 +1,33 @@
 export const routes = [
-  { path: '/', redirect: '/dashboard' },
+  { path: '/', redirect: '/login' },
   {
     path: '/',
     component: () => import('@/layouts/default.vue'),
     children: [
       {
         path: 'dashboard',
+        name: 'dashboard',
         component: () => import('@/pages/dashboard.vue'),
       },
       {
         path: 'user',
+        name: 'user',
         component: () => import('@/pages/user.vue'),
       },
       {
         path: 'router',
+        name: 'router',
         component: () => import('@/pages/router.vue'),
       },
       {
+        path: 'interface',
+        name: 'interface',
+        component: () => import('@/pages/dashboard-router.vue'),
+      },
+      {
         path: 'account-settings',
+        name: 'account-settings',
         component: () => import('@/pages/account-settings.vue'),
-      },
-      {
-        path: 'typography',
-        component: () => import('@/pages/typography.vue'),
-      },
-      {
-        path: 'icons',
-        component: () => import('@/pages/icons.vue'),
-      },
-      {
-        path: 'cards',
-        component: () => import('@/pages/cards.vue'),
-      },
-      {
-        path: 'tables',
-        component: () => import('@/pages/tables.vue'),
-      },
-      {
-        path: 'form-layouts',
-        component: () => import('@/pages/form-layouts.vue'),
       },
     ],
   },
@@ -48,6 +37,7 @@ export const routes = [
     children: [
       {
         path: 'login',
+        name: 'login',
         component: () => import('@/pages/login.vue'),
       },
       {

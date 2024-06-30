@@ -1,8 +1,8 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import AccountSettingsAccount from '@/views/pages/account-settings/AccountSettingsAccount.vue'
-import AccountSettingsNotification from '@/views/pages/account-settings/AccountSettingsNotification.vue'
-import AccountSettingsSecurity from '@/views/pages/account-settings/AccountSettingsSecurity.vue'
+import UserSettingsAccount from '@/views/user/UserSettingAccount.vue'
+import UserSettingsNotification from '@/views/user/UserSettingNotification.vue'
+import UserSettingsSecurity from '@/views/user//UserSettingSecurity.vue'
 
 const route = useRoute()
 const activeTab = ref(route.params.tab)
@@ -54,17 +54,17 @@ const tabs = [
     >
       <!-- Account -->
       <VWindowItem value="account">
-        <AccountSettingsAccount />
+        <UserSettingsAccount />
       </VWindowItem>
 
       <!-- Security -->
       <VWindowItem value="security">
-        <AccountSettingsSecurity />
+        <UserSettingsSecurity />
       </VWindowItem>
 
       <!-- Notification -->
       <VWindowItem value="notification">
-        <AccountSettingsNotification />
+        <UserSettingsNotification />
       </VWindowItem>
     </VWindow>
   </div>

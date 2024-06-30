@@ -1,34 +1,77 @@
 <script setup>
-import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTitle.vue'
-import VerticalNavGroup from '@layouts/components/VerticalNavGroup.vue'
-import VerticalNavLink from '@layouts/components/VerticalNavLink.vue'
+import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTitle.vue';
+import VerticalNavGroup from '@layouts/components/VerticalNavGroup.vue';
+import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
+import axios from 'axios';
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const role = ref('');
+const address = ref('');
+const router = useRouter();
+let intervalId;
+
+const fetchUserInfo = () => {
+  axios.get('/login-user')
+    .then(response => {
+      const data = response.data;
+      if (data.error) {
+        router.push('/login');
+      } else {
+        role.value = data.role;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching user info:', error);
+      router.push('/login');
+    });
+};
+
+const fetchRouterInfo = () => {
+  axios.get('/login-router')
+    .then(response => {
+      const data = response.data;
+      if (!data.error) {
+        address.value = data.address;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching router info:', error);
+    });
+};
+
+const logoutRouter = () => {
+  axios.post('/logout-router')
+    .then(response => {
+      if (response.data.success) {
+        router.push('/dashboard');
+      } else {
+        console.error('Failed to logout router');
+      }
+    })
+    .catch(error => {
+      console.error('Error logging out router:', error);
+    });
+};
+
+onMounted(() => {
+  fetchUserInfo();
+  intervalId = setInterval(fetchRouterInfo, 10000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
 </script>
 
 <template>
   <!-- 👉 Dashboards -->
   <VerticalNavLink
+    v-if="!address"
     :item="{
       title: 'Dashboards',
       icon: 'ri-home-smile-line',
       to: '/dashboard',
-    }"
-  />
-
-  <!-- 👉 Users -->
-  <VerticalNavLink
-    :item="{
-      title: 'Users',
-      icon: 'ri-user-line',
-      to: '/user',
-    }"
-  />
-
-  <!-- 👉 Routers -->
-  <VerticalNavLink
-    :item="{
-      title: 'Routers',
-      icon: 'ri-router-line',
-      to: '/router',
     }"
   />
 
@@ -39,91 +82,77 @@ import VerticalNavLink from '@layouts/components/VerticalNavLink.vue'
     }"
   />
 
+  <!-- 👉 Users -->
   <VerticalNavLink
+    v-if="role === 'admin' && !address"
     :item="{
-      title: 'Account Settings',
-      icon: 'ri-user-settings-line',
-      to: '/account-settings',
+      title: 'Users',
+      icon: 'ri-user-line',
+      to: '/user',
+    }"
+  />
+
+  <!-- 👉 Router -->
+  <VerticalNavLink
+    v-if="!address"
+    :item="{
+      title: 'Router',
+      icon: 'ri-router-line',
+      to: '/router',
+    }"
+  />
+
+  <!-- 👉 Interface -->
+  <VerticalNavLink
+    v-if="address"
+    :item="{
+      title: 'Interface',
+      icon: 'ri-stack-line',
+      to: '/interface',
+    }"
+  />
+
+  <!-- 👉 Hotspot -->
+  <VerticalNavGroup
+    v-if="address"
+    :item="{
+      title: 'Hotspot',
+      icon: 'ri-hotspot-line',
+    }"
+  >
+    <!-- 👉 User Hotspot -->
+    <VerticalNavLink
+      :item="{
+        title: 'User Hotspot',
+        to: '/user-hotspot',
+      }"
+    />
+
+    <!-- 👉 User Profile -->
+    <VerticalNavLink
+      :item="{
+        title: 'User Profile',
+        to: '/user-profile',
+      }"
+    />
+  </VerticalNavGroup>
+
+  <!-- 👉 Custom Login -->
+  <VerticalNavLink
+    v-if="address"
+    :item="{
+      title: 'Custom Login',
+      icon: 'ri-file-edit-line',
+      to: '/custom-login',
     }"
   />
 
   <VerticalNavLink
+    v-if="address"
     :item="{
-      title: 'Login',
-      icon: 'ri-login-box-line',
-      to: '/login',
+      title: 'Go Back',
+      icon: 'ri-reply-line',
     }"
+    @click.native="logoutRouter"
   />
-  <VerticalNavLink
-    :item="{
-      title: 'Register',
-      icon: 'ri-user-add-line',
-      to: '/register',
-    }"
-  />
-  <VerticalNavLink
-    :item="{
-      title: 'Error',
-      icon: 'ri-information-line',
-      to: '/no-existence',
-    }"
-  />
-
-  <!-- 👉 User Interface -->
-  <VerticalNavSectionTitle
-    :item="{
-      heading: 'User Interface',
-    }"
-  />
-  <VerticalNavLink
-    :item="{
-      title: 'Typography',
-      icon: 'ri-text',
-      to: '/typography',
-    }"
-  />
-  <VerticalNavLink
-    :item="{
-      title: 'Icons',
-      icon: 'ri-remixicon-line',
-      to: '/icons',
-    }"
-  />
-  <VerticalNavLink
-    :item="{
-      title: 'Cards',
-      icon: 'ri-bar-chart-box-line',
-      to: '/cards',
-    }"
-  />
-
-  <!-- 👉 Forms & Tables -->
-  <VerticalNavSectionTitle
-    :item="{
-      heading: 'Forms & Tables',
-    }"
-  />
-  <VerticalNavLink
-    :item="{
-      title: 'Form Layouts',
-      icon: 'ri-layout-4-line',
-      to: '/form-layouts',
-    }"
-  />
-  
-  <VerticalNavLink
-    :item="{
-      title: 'Tables',
-      icon: 'ri-table-alt-line',
-      to: '/tables',
-    }"
-  />
-
-  <!-- 👉 Others -->
-  <VerticalNavSectionTitle
-    :item="{
-      heading: 'Others',
-    }"
-  />
-
 </template>

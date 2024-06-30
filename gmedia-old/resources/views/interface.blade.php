@@ -68,7 +68,7 @@
         var interfaceValue = $('#interface').val()
         var traffic = encodeURIComponent(interfaceValue);
         $.ajax({
-            url: '{{ url('dashboard-special') }}' + '/' + traffic,
+            url: '{{ url('traffic') }}' + '/' + traffic,
             datatype: "json",
             success: function(data) {
                 var midata = data;

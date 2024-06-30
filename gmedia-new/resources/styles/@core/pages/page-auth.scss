@@ -1,44 +1,59 @@
 .auth-wrapper {
-  min-block-size: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Set min-height to fill the viewport */
+  position: relative; /* Ensure relative positioning for absolute children */
+}
+
+.auth-image-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.auth-form-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  max-width: 448px; /* Ensure max-width for the card */
+  z-index: 1 !important;
+  position: relative; /* Ensure relative positioning for card content */
 }
 
 .auth-footer-mask {
   position: absolute;
-  inset-block-end: 0;
-  min-inline-size: 100%;
-}
-
-.auth-card {
-  z-index: 1 !important;
-}
-
-.auth-footer-start-tree,
-.auth-footer-end-tree {
-  position: absolute;
-  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .auth-footer-start-tree {
-  inset-block-end: 0;
-  inset-inline-start: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 250px; /* Adjust width as needed */
 }
 
 .auth-footer-end-tree {
-  inset-block-end: 0;
-  inset-inline-end: 0;
-}
-
-.auth-illustration {
-  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 350px; /* Adjust width as needed */
 }
 
 .auth-logo {
   position: absolute;
-  z-index: 1;
-  inset-block-start: 2rem;
-  inset-inline-start: 2.3rem;
+  top: 2rem; /* Adjust top positioning */
+  left: 2.3rem; /* Adjust left positioning */
+  z-index: 2;
 }
 
 .auth-bg {
   background-color: rgb(var(--v-theme-surface));
 }
+
+/* Add any additional styles as needed */

@@ -1,5 +1,44 @@
 <script setup>
+import { ref } from 'vue';
+import axios from 'axios';
 import avatar1 from '@images/avatars/avatar-1.png'
+import { useRouter } from 'vue-router'
+
+const logout = async () => {
+  try {
+    const response = await axios.post('/logout');
+    if (response.data.success) {
+      router.push('/login');
+    } else {
+      // Handle error if needed
+    }
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
+};
+
+const username = ref('');
+const firstname = ref('');
+const lastname = ref('');
+const role = ref('');
+const router = useRouter();
+
+axios.get('/login-user')
+  .then(response => {
+    const data = response.data;
+    if (data.error) {
+      router.push('/login');
+    } else {
+      role.value = data.role;
+      // Check if firstname exists, otherwise use username
+      firstname.value = data.user_data.firstname ?? data.username;
+      lastname.value = data.user_data.lastname ?? ''; // Provide default value for lastname if needed
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching user info:', error);
+    router.push('/login');
+  });
 </script>
 
 <template>
@@ -48,13 +87,13 @@ import avatar1 from '@images/avatars/avatar-1.png'
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{ firstname }} {{ lastname }}
             </VListItemTitle>
-            <VListItemSubtitle>Admin</VListItemSubtitle>
+            <VListItemSubtitle>{{ role }}</VListItemSubtitle>
           </VListItem>
           <VDivider class="my-2" />
 
-          <!-- 👉 Account Setting -->
+          <!-- 👉 Profile -->
           <VListItem to="/account-settings">
             <template #prepend>
               <VIcon
@@ -64,7 +103,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
               />
             </template>
 
-            <VListItemTitle>Account Settings</VListItemTitle>
+            <VListItemTitle>Profile Settings</VListItemTitle>
           </VListItem>
 
           <!-- 👉 FAQ -->
@@ -84,7 +123,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
+          <VListItem @click="logout">
             <template #prepend>
               <VIcon
                 class="me-2"
