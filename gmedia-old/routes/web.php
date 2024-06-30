@@ -6,10 +6,6 @@ use App\Http\Controllers\FileController;
 use App\Http\controllers\HostpotController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\RouterController;
-use App\Http\controllers\TransaksiController;
-use App\Http\controllers\TrafficController;
-use App\Http\controllers\LandingController;
-use App\Http\controllers\PemesananController;
 use App\Http\Controllers\InterfaceController;
 use App\Http\Controllers\LoginPageController;
 use App\Http\Controllers\FileTransferController;
@@ -26,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//login
+//login website
 Route::get('/', [AuthController::class, 'Index'])->name('landing-page.index');
 Route::get('login', [AuthController::class, 'Index'])->name('login');
 Route::get('loginAuth', [AuthController::class, 'loginAuth'])->name('loginAuth');
@@ -66,9 +62,6 @@ Route::get('/hotspot/profile/delete/{id}', [HostpotController::class, 'deletepro
 Route::get('/hotspot/status', [HostpotController::class, 'active'])->name('active');
 Route::get('/hotspot/status/active', [HostpotController::class, 'time'])->name('active.time');
 
-//Hotspot-scheduler
-Route::get('/hotspot/scheduler', [HostpotController::class, 'scheduler'])->name('scheduler');
-
 //User
 Route::get('user', [UserController::class, 'user'])->name('user');
 Route::post('user', [UserController::class, 'adduser'])->name('adduser.post');
@@ -93,6 +86,8 @@ Route::get('/login-page', [LoginPageController::class, 'index'])->name('login-pa
 Route::post('/login-page', [LoginPageController::class, 'store'])->name('login-page.store');
 Route::post('/execute-command', [LoginPageController::class, 'executeCommand'])->name('execute-command');
 
-//manage mikrotik
+//upload file to mikrotik
 Route::get('/file-transfer', [FileTransferController::class, 'index'])->name('file.transfer');
 Route::post('/file-transfer/upload', [FileTransferController::class, 'upload'])->name('file.transfer.upload');
+
+Route::get('/download-file', [FileController::class, 'downloadFile'])->name('downloadFile');

@@ -16,17 +16,15 @@ class RouterController extends Controller
     public function router(){
 
         session()->forget(['ip', 'user', 'pass']);
-        // Ambil ID pengguna yang saat ini login
         $userId = Auth::id();
     
-        // Periksa apakah pengguna memiliki level admin
-        $userLevel = Auth::user()->level;
+        $userLevel = Auth::user()->role;
     
         if ($userLevel == 'admin') {
-            // Jika pengguna memiliki level admin, ambil semua router
+
             $routers = Router::all();
         } else {
-            // Jika tidak, ambil daftar router yang terkait dengan pengguna yang login
+            //ambil daftar router yang terkait dengan pengguna yang login
             $routers = Router::with('user:id,email')->where('user_id', $userId)->get();    
         }
     
@@ -35,7 +33,6 @@ class RouterController extends Controller
 
 
     public function addrouter(Request $request) {
-        // Validasi data yang diterima dari formulir
         $validasi = $request->validate([
             'address' => 'required',
             'name' => 'required',
@@ -46,13 +43,10 @@ class RouterController extends Controller
         // Enkripsi password sebelum disimpan
         $validasi['password'] = Crypt::encryptString($validasi['password']);
 
-        // Ambil ID pengguna yang saat ini login
         $userId = Auth::id();
 
-        // Tambahkan user_id ke dalam array validasi
         $validasi['user_id'] = $userId;
     
-        // Tambahkan user ke tabel pengguna
         try {
             router::create($validasi);
             return redirect('router')->with('success', 'Router berhasil ditambahkan');
@@ -69,15 +63,11 @@ class RouterController extends Controller
         $item->address = $request->address;
         $item->username = $request->username;
 
-        // Periksa apakah password disediakan dalam permintaan
         if ($request->filled('password')) {
             try {
-                // Dekripsi password yang tersimpan di database
-                $decryptedPassword = Crypt::decryptString($item->password);
-                // Enkripsi password baru sebelum menyimpannya ke dalam basis data
+                
                 $item->password = Crypt::encryptString($request->password);
             } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
-                // Handle dekripsi yang gagal, misalnya jika password tidak terenkripsi
                 return redirect()->back()->with('error', 'Gagal mendekripsi password');
             }
         }

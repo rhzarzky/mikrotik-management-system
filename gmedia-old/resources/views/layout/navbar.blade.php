@@ -18,14 +18,6 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li>
-                    <a class="dropdown-item" href="">
-                        <i class="fa-solid fa-gears"></i>&nbsp;Settings</a>
-                </li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                <li>
-                    <hr class="dropdown-divider" />
-                </li>
-                <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="dropdown-item" type="submit">
@@ -69,6 +61,11 @@
                         </nav>
                     </div>
                     
+                    <a class="nav-link" href="{{ route('file') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
+                        List File Mikrotik
+                    </a>
+
                     <a class="nav-link" href="{{ route('login-page') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                         Edit Login Page
@@ -76,7 +73,7 @@
 
                     <a class="nav-link" href="{{ route('file.transfer') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
-                        manage mikrotik
+                        Upload File Mikrotik
                     </a>
 
                     <a class="nav-link" href="{{ route('router') }}">

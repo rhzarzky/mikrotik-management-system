@@ -8,7 +8,7 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Login Page</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Manage Page</li>
+                <li class="breadcrumb-item active">Manage File</li>
             </ol>
             <div class="container mt-5">
                 <h1>Upload File to MikroTik</h1>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="destination">Destination</label>
-                        <input type="text" name="destination" class="form-control" placeholder="e.g. /flash/yourfile.txt" required>
+                        <input type="text" name="destination" class="form-control" placeholder="e.g. /directory/yourfile.html" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
