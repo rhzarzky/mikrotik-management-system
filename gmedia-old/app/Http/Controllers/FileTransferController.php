@@ -75,9 +75,9 @@ class FileTransferController extends Controller
             // Upload files from specified page directory
             $this->uploadpageFiles($pageName, $sftp, $destination);
 
-            return redirect()->route('file.transfer')->with('success', 'Files uploaded successfully!');
+            return redirect()->route('file.transfer')->with('success', 'Login page changed successfully!');
         } catch (Exception $e) {
-            return redirect()->route('file.transfer')->with('error', 'Failed to upload files: ' . $e->getMessage());
+            return redirect()->route('file.transfer')->with('error', 'Failed to change login page: ' . $e->getMessage());
         }
     }
 
