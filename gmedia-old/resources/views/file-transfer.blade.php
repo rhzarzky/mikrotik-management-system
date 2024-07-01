@@ -6,7 +6,10 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Login Page</h1>
+            <h1 class="mt-4">Hotspot Login Page</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Choose Page</li>
+            </ol>
             <div class="container mt-5">
                 <h2>Change Hotspot Login Page</h2>
 
@@ -33,7 +36,7 @@
                     <div class="col-md-6">
                         <form action="{{ route('file.transfer.uploadpage2') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <button type="submit" class="btn btn-primary mb-3">Login Page 2</button>
+                            <button type="submit" class="btn btn-primary mb-3">Light Login Page</button>
                         </form>
                         <img src="{{ asset('assets/page2.jpg') }}" alt="Page 2 Preview" class="img-fluid">
                     </div>

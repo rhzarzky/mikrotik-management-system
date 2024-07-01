@@ -2,12 +2,11 @@
 
 use App\Http\controllers\AuthController;
 use App\Http\controllers\DashboardController;
-use App\Http\Controllers\FileController;
 use App\Http\controllers\HostpotController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\RouterController;
 use App\Http\Controllers\InterfaceController;
-use App\Http\Controllers\LoginPageController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\FileTransferController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,3 +78,6 @@ Route::get('/router/delete/{id}', [RouterController::class, 'deleteRouter'])->na
 Route::get('/file-transfer', [FileTransferController::class, 'index'])->name('file.transfer');
 Route::post('/file-transfer/uploadpage1', [FileTransferController::class, 'uploadpage1'])->name('file.transfer.uploadpage1');
 Route::post('/file-transfer/uploadpage2', [FileTransferController::class, 'uploadpage2'])->name('file.transfer.uploadpage2');
+
+Route::get('/upload-manual', [UploadController::class, 'index'])->name('upload');
+Route::post('/upload-manual', [UploadController::class, 'uploadManual'])->name('upload.uploadManual');

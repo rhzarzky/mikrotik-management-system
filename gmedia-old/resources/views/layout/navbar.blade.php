@@ -63,7 +63,12 @@
 
                     <a class="nav-link" href="{{ route('file.transfer') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
-                        Hotspot Login Page
+                        Change Hotspot Login Page
+                    </a>
+
+                    <a class="nav-link" href="{{ route('upload') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
+                        Upload Hotspot Login Page
                     </a>
 
                     <a class="nav-link" href="{{ route('router') }}">

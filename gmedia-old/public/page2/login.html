@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#06f" />
-    <link rel="shortcut icon" href="./favicon.ico" />
-    <link rel="stylesheet" href="./style.css" />
-    <title>Hotspot | Login</title>
-  </head>
-  <body>
-    $(if chap-id)
-    <form name="sendin" action="$(link-login-only)" method="post">
-      <input type="hidden" name="username" />
-      <input type="hidden" name="password" />
-      <input type="hidden" name="dst" value="$(link-orig)" />
-      <input type="hidden" name="popup" value="true" />
-    </form>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#06f" />
+        <link rel="shortcut icon" href="./favicon.ico" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Hotspot | Login</title>
+    </head>
+    <body>
+        $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post">
+            <input type="hidden" name="username" />
+            <input type="hidden" name="password" />
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+        </form>
 
-    <script src="./md5.js"></script>
-    <script>
-      function doLogin() {
-        document.sendin.username.value = document.login.username.value;
-        document.sendin.password.value = hexMD5(
-          "$(chap-id)" + document.login.password.value + "$(chap-challenge)"
-        );
-        document.sendin.submit();
-        return false;
-      }
-    </script>
-    $(endif)
+        <script src="./md5.js"></script>
+        <script>
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value;
+                document.sendin.password.value = hexMD5(
+                    "$(chap-id)" +
+                        document.login.password.value +
+                        "$(chap-challenge)"
+                );
+                document.sendin.submit();
+                return false;
+            }
+        </script>
+        $(endif)
 
-    <!-- prettier-ignore -->
-    <div class="container">
+        <!-- prettier-ignore -->
+        <div class="container">
       <div class="wrapper">
         <div class="title-wrapper">
           <h1>Hello!</h1>
@@ -43,7 +45,6 @@
           <ul>
             <li id="member" class="login-method-menu ">Member</li>
             <li id='voucher' class="login-method-menu">Voucher</li>
-            <!-- <li id='qrCode' class="login-method-menu">QR Code</li> -->
           </ul>
         </div>
 
@@ -75,7 +76,6 @@
             </a>
           </div>
 
-          <p id="qrCodeInfo" style="text-align: center; display: none;">Untuk masuk melalui QR Code, <a id="qrCodeScannerURL" href="">klik disini</a></p>
 
           $(if error)
             <p class="error">$(error)</p>
@@ -85,14 +85,11 @@
         </form>
 
         <div class="form-footer">
-          $(if trial == 'yes')
-            <p style="margin-bottom: 15px;">Mau beli tapi masih ragu? <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">Coba GRATIS!</a></p>
-          $(endif)
-          <p class="copy-right">Powered By <a target="_blank" href="intent:https://mikmoni.com#Intent;end">Mikmoni.com</a></p>
+          <p class="copy-right">Powered By MikroTik RouterOS</p>
         </div>
       </div>
     </div>
 
-    <script type="module" src="./loginScript.js"></script>
-  </body>
+        <script type="module" src="./loginScript.js"></script>
+    </body>
 </html>
