@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use phpseclib3\Net\SFTP;
-use Illuminate\Support\Facades\Session;
 
 class FileTransferController extends Controller
 {
@@ -14,19 +13,46 @@ class FileTransferController extends Controller
         return view('file-transfer');
     }
 
-    public function upload(Request $request)
+    public function uploadpage1(Request $request)
     {
-        $request->validate([
-            'file' => 'required|file',
-            'destination' => 'required|string',
-        ]);
+        return $this->uploadpage('page1');
+    }
 
+    public function uploadpage2(Request $request)
+    {
+        return $this->uploadpage('page2');
+    }
+
+    private function uploadpageFiles($pageName, $sftp, $destination)
+    {
+        $publicPath = public_path($pageName);
+
+        if (!is_dir($publicPath)) {
+            throw new Exception("Directory $pageName not found in Laravel public directory.");
+        }
+
+        $files = scandir($publicPath);
+        if ($files === false) {
+            throw new Exception("Failed to list files in $pageName directory.");
+        }
+
+        $files = array_diff($files, array('.'));
+
+        foreach ($files as $file) {
+            $filePath = $publicPath . '/' . $file;
+            if (is_file($filePath)) {
+                $sftp->put($destination . $file, file_get_contents($filePath));
+            }
+        }
+    }
+
+    private function uploadpage($pageName)
+    {
         $ip = session()->get('ip');
         $user = session()->get('user');
         $pass = session()->get('pass');
 
-        $file = $request->file('file');
-        $destination = $request->destination;
+        $destination = '/hotspot/';
 
         $sftp = new SFTP($ip);
         if (!$sftp->login($user, $pass)) {
@@ -34,10 +60,25 @@ class FileTransferController extends Controller
         }
 
         try {
-            $sftp->put($destination, file_get_contents($file->getPathname()));
-            return redirect()->route('file.transfer')->with('success', 'File uploaded successfully!');
+            // Remove all files in the /hotspot/ directory on MikroTik
+            $fileList = $sftp->nlist($destination);
+            if ($fileList === false) {
+                throw new Exception("Failed to list files in the hotspot directory.");
+            }
+
+            foreach ($fileList as $file) {
+                if ($file !== '.' && $file !== '..') {
+                    $sftp->delete($destination . $file);
+                }
+            }
+
+            // Upload files from specified page directory
+            $this->uploadpageFiles($pageName, $sftp, $destination);
+
+            return redirect()->route('file.transfer')->with('success', 'Login page changed successfully!');
         } catch (Exception $e) {
-            return redirect()->route('file.transfer')->with('error', 'Failed to upload file: ' . $e->getMessage());
+            return redirect()->route('file.transfer')->with('error', 'Failed to change login page: ' . $e->getMessage());
         }
     }
+
 }

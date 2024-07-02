@@ -2,12 +2,11 @@
 
 use App\Http\controllers\AuthController;
 use App\Http\controllers\DashboardController;
-use App\Http\Controllers\FileController;
 use App\Http\controllers\HostpotController;
 use App\Http\Controllers\UserController;
 use App\Http\controllers\RouterController;
 use App\Http\Controllers\InterfaceController;
-use App\Http\Controllers\LoginPageController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\FileTransferController;
 use Illuminate\Support\Facades\Route;
 
@@ -75,19 +74,10 @@ Route::post('router', [RouterController::class, 'addrouter'])->name('addrouter.p
 Route::post('/router/edit/{id}', [RouterController::class, 'ubah'])->name('router.edit');
 Route::get('/router/delete/{id}', [RouterController::class, 'deleteRouter'])->name('deleteRouter');
 
-//File Page
-Route::get('/file', [FileController::class, 'file'])->name('file');
-Route::post('/file/add', [FileController::class, 'addfile'])->name('addfile.post');
-Route::post('/file/edit', [FileController::class, 'editfile'])->name('editfile.post');
-Route::get('/file/delete/{id}', [FileController::class, 'deletefile'])->name('deletefile');
-
-//login page
-Route::get('/login-page', [LoginPageController::class, 'index'])->name('login-page');
-Route::post('/login-page', [LoginPageController::class, 'store'])->name('login-page.store');
-Route::post('/execute-command', [LoginPageController::class, 'executeCommand'])->name('execute-command');
-
-//upload file to mikrotik
+//Upload file page to mikrotik
 Route::get('/file-transfer', [FileTransferController::class, 'index'])->name('file.transfer');
-Route::post('/file-transfer/upload', [FileTransferController::class, 'upload'])->name('file.transfer.upload');
+Route::post('/file-transfer/uploadpage1', [FileTransferController::class, 'uploadpage1'])->name('file.transfer.uploadpage1');
+Route::post('/file-transfer/uploadpage2', [FileTransferController::class, 'uploadpage2'])->name('file.transfer.uploadpage2');
 
-Route::get('/download-file', [FileController::class, 'downloadFile'])->name('downloadFile');
+Route::get('/upload-manual', [UploadController::class, 'index'])->name('upload');
+Route::post('/upload-manual', [UploadController::class, 'uploadManual'])->name('upload.uploadManual');
