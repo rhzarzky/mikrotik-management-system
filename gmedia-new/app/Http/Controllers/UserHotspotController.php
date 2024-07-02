@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\RouterosAPI;
-use App\Models\User;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class UserHotspotController extends Controller
 {
@@ -15,47 +14,25 @@ class UserHotspotController extends Controller
      */
     public function index()
     {
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
-    	$API = new RouterosAPI();
-    	$API->debug('false');
+        $ip = session()->get('address');
+        $user = session()->get('username');
+        $pass = session()->get('password');
+        $API = new RouterosAPI();
+        $API->debug = false;
 
-    	if($API->connect($ip, $user, $pass)){ 
-    	
-        $hotspotuser = $API->comm('/ip/hotspot/user/print');
-        $profile = $API->comm('/ip/hotspot/user/profile/print');
+        if ($API->connect($ip, $user, $pass)) {
+            $hotspotuser = $API->comm('/ip/hotspot/user/print');
+            $profile = $API->comm('/ip/hotspot/user/profile/print');
 
-        //User berdasrkan ID
-            $item = user::all();
-
-            foreach ($item as $item1) {
-                if ($item1->username == auth()->user()->username) {
-                    $item1->id;
-             
-                    $data = [
-                        'hotspotuser' => $hotspotuser,
-                        'profile' => $profile,
-                        'item1' => $item1->id,
-                    ];
-                }
-                
-            }
+            $data = [
+                'hotspotuser' => $hotspotuser,
+                'profile' => $profile,
+            ];
            
-            return view('voucher', $data, ['datausers' => $item]);
-
+            return response()->json(['data' => $data], Response::HTTP_OK);
         } else {
-
-            return redirect('failed');
+            return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -63,91 +40,47 @@ class UserHotspotController extends Controller
      */
     public function store(Request $request)
     {
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
-    	$API = new RouterosAPI();
-    	$API->debug('false');
-
-    	if ($API->connect($ip, $user, $pass)){
-
-         //User berdasarkan ID
-            $item = user::all();
-            
-            foreach ($item as $item1) {
-                if ($item1->username == auth()->user()->username) {
-                    $item1->id;
-              
-
-    	//timelimit
-    		if ($request['timelimit'] == '') {
-    			$timelimit = '0';
-    		}else{
-    			$timelimit = $request['timelimit'];
-    		}
-
-    		$API->comm('/ip/hotspot/user/add', array(
-        		'name' => $request['user'],
-        		'password' => $request['password'],
-        		'profile' => $request['profile'],
-        		'limit-uptime' => $timelimit,
-                'comment' => $item1->id,
-                'disabled' => $request['disabled'],
-    		));
-
-                 }
-               
-            }
-
-            //dd($data);
-
-    		return redirect('/hotspot/voucher')->with('success','Voucher berhasil dibuat');
-
-    	}else{
-    		return redirect('failed');
-    	}
-    }
+        $ip = session()->get('address');
+        $user = session()->get('username');
+        $pass = session()->get('password');
+        $API = new RouterosAPI();
+        $API->debug = false;
+    
+        if ($API->connect($ip, $user, $pass)) {
+            $timelimit = $request['limit-uptime'] ?: '0';
+    
+            $API->comm('/ip/hotspot/user/add', [
+                'name' => $request['name'],
+                'password' => $request['password'],
+                'profile' => $request['profile'],
+                'limit-uptime' => $timelimit,
+                'disabled' => 'false',
+            ]);
+    
+            return response()->json(['message' => 'User created successfully'], Response::HTTP_CREATED);
+        } else {
+            return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
+        }
+    }    
 
     /**
-     * Display the specified resource.
-     */
-    /**
-     * Display a listing of the resource.
+     * Display a listing of active hotspot users.
      */
     public function active()
     {
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
+        $ip = session()->get('address');
+        $user = session()->get('username');
+        $pass = session()->get('password');
         $API = new RouterosAPI();
         $API->debug = false;
 
         if ($API->connect($ip, $user, $pass)) {
+            $active = $API->comm('/ip/hotspot/active/print');
 
-    	    $active = $API->comm('/ip/hotspot/active/print');
-
-            $data = [
-                // 'totalhotspotactive' => count($hotspotactive),
-                'hotspotactive' => $active,
-                // 'time' => $active['session-time-left'],
-            ];
-
-            // dd($data);
-            
-            return view('active', $data);
-
+            return response()->json(['data' => $active], Response::HTTP_OK);
         } else {
-
-            return redirect('failed');
+            return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -155,40 +88,47 @@ class UserHotspotController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
+        $ip = session()->get('address');
+        $user = session()->get('username');
+        $pass = session()->get('password');
         $API = new RouterosAPI();
         $API->debug = false;
 
-        if($API->connect($ip, $user, $pass)){
-
-             //User berdasrkan ID
-                $item = user::all();
-                
-                foreach ($item as $item1) {
-                    if ($item1->username == auth()->user()->username) {
-                    $item1->id;
-
-            $API->comm("/ip/hotspot/user/set", [
-                ".id" => $request['id'],
-                'name' => $request['user'],
+        if ($API->connect($ip, $user, $pass)) {
+            $API->comm('/ip/hotspot/user/set', [
+                '.id' => $id,
+                'name' => $request['name'],
                 'password' => $request['password'],
                 'profile' => $request['profile'],
-                'limit-uptime' => $request['timelimit'],
-                'disabled' => $request['disabled'] == '' ? $request['disabled'] : $request['disabled'],
-                'comment' => $item1->id,
+                'limit-uptime' => $request['limit-uptime'],
             ]);
+
+            return response()->json(['message' => 'User updated successfully'], Response::HTTP_OK);
+        } else {
+            return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
         }
     }
 
-          // dd($data);
+        /**
+     * Update the specified resource in storage.
+     */
+    public function activation(Request $request, string $id)
+    {
+        $ip = session()->get('address');
+        $user = session()->get('username');
+        $pass = session()->get('password');
+        $API = new RouterosAPI();
+        $API->debug = false;
 
-            return redirect('/hotspot/voucher')->with('success','Voucher berhasil diubah');
+        if ($API->connect($ip, $user, $pass)) {
+            $API->comm('/ip/hotspot/user/set', [
+                '.id' => $id,
+                'disabled' => $request['disabled'],
+            ]);
 
-        }else{
-
-            return redirect('failed');
+            return response()->json(['message' => 'User updated successfully'], Response::HTTP_OK);
+        } else {
+            return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -197,69 +137,48 @@ class UserHotspotController extends Controller
      */
     public function destroy(string $id)
     {
-        $ip = session()->get('ip');
-		$user = session()->get('user');
-		$pass = session()->get('pass');
-		$API = new RouterosAPI();
-		$API->debug = false;
+        $ip = session()->get('address');
+        $user = session()->get('username');
+        $pass = session()->get('password');
+        $API = new RouterosAPI();
+        $API->debug = false;
 
-		if ($API->connect($ip, $user, $pass)) {
+        if ($API->connect($ip, $user, $pass)) {
+            $API->comm('/ip/hotspot/user/remove', ['.id' => $id]);
 
-			$API->comm('/ip/hotspot/user/remove', [
-				'.id' => '*' . $id,
-			]);
-
-			
-			return redirect('/hotspot/voucher');
-		} else {
-
-			return redirect('failed');
-		}
+            return response()->json(['message' => 'User deleted successfully'], Response::HTTP_OK);
+        } else {
+            return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
+        }
     }
 
-    public function voucher(Request $request){
-        $ip = session()->get('ip');
-        $user = session()->get('user');
-        $pass = session()->get('pass');
+    /**
+     * Generate multiple vouchers.
+     */
+    public function voucher(Request $request)
+    {
+        $ip = session()->get('address');
+        $user = session()->get('username');
+        $pass = session()->get('password');
         $API = new RouterosAPI();
-        $API->debug('false');
+        $API->debug = false;
 
-        if ($API->connect($ip, $user, $pass)){
+        if ($API->connect($ip, $user, $pass)) {
+            $timelimit = $request['timelimit'] ?: '0';
 
-
-        //timelimit
-            if ($request['timelimit'] == '') {
-                $timelimit = '0';
-            }else{
-                $timelimit = $request['timelimit'];
+            for ($i = 0; $i < $request['jum']; $i++) {
+                $API->comm('/ip/hotspot/user/add', [
+                    'name' => Str::random(4),
+                    'password' => Str::random(4),
+                    'profile' => $request['profile'],
+                    'limit-uptime' => $timelimit,
+                    'disabled' => $request['disabled'],
+                ]);
             }
 
-        //User berdasrkan ID
-            $item = user::all();
-            
-            foreach ($item as $item1) {
-                if ($item1->username == auth()->user()->username) {
-                $item1->id;
-
-            for ($id=0; $id < $request['jum'] ; $id++) { 
-           
-            $API->comm('/ip/hotspot/user/add', array(
-                'name' => Str::random(4),
-                'password' => Str::random(4),
-                'profile' => $request['profile'],
-                'limit-uptime' => $timelimit,
-                'comment' => $item1->id,
-                'disabled' => $request['disabled'],
-                ));
-              }
-           }
-       }
-              // dd($data);
-
-            return redirect('/hotspot/voucher')->with('success','Generate Voucher berhasil');
-
-        }else{
-            return redirect('failed');
+            return response()->json(['message' => 'Vouchers generated successfully'], Response::HTTP_CREATED);
+        } else {
+            return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
         }
     }
 }

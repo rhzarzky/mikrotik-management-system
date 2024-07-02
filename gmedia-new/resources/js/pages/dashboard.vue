@@ -1,26 +1,33 @@
 <script setup>
-
-const totalProfit = {
-  title: 'Total Profit',
-  color: 'secondary',
-  icon: 'ri-pie-chart-2-line',
-  stats: '$25.6k',
-  change: 42,
-  subtitle: 'Weekly Project',
-}
-
-const newProject = {
-  title: 'New Project',
-  color: 'primary',
-  icon: 'ri-file-word-2-line',
-  stats: '862',
-  change: -18,
-  subtitle: 'Yearly Project',
-}
+import UserTable from '@/views/user/UserTable.vue'
+import RouterTable from '@/views/router/RouterTable.vue'
+import UserCount from '@/views/dashboard/UserCount.vue'
+import RouterCount from '@/views/dashboard/RouterCount.vue'
 </script>
 
 <template>
-  <VRow class="match-height">
- 
+  <VRow>
+
+    <VCol cols="12" sm="6" md="4">
+      <VCard>
+        <UserCount />
+      </VCard>
+    </VCol>
+    <VCol cols="12" sm="6" md="4">
+      <VCard>
+        <RouterCount />
+      </VCard>
+    </VCol>
+    <VCol cols="12">
+      <VCard title="Router List">
+        <RouterTable />
+      </VCard>
+    </VCol>
+    <VCol cols="12">
+      <VCard title="User List">
+        <UserTable />
+      </VCard>
+    </VCol>
+    
   </VRow>
 </template>

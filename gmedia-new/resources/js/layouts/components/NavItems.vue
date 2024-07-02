@@ -9,7 +9,6 @@ import { useRouter } from 'vue-router';
 const role = ref('');
 const address = ref('');
 const router = useRouter();
-let intervalId;
 
 const fetchUserInfo = () => {
   axios.get('/login-user')
@@ -44,7 +43,8 @@ const logoutRouter = () => {
   axios.post('/logout-router')
     .then(response => {
       if (response.data.success) {
-        router.push('/dashboard');
+        router.push('/router');
+        fetchRouterInfo();
       } else {
         console.error('Failed to logout router');
       }
@@ -56,12 +56,9 @@ const logoutRouter = () => {
 
 onMounted(() => {
   fetchUserInfo();
-  intervalId = setInterval(fetchRouterInfo, 10000);
+  fetchRouterInfo();
 });
 
-onUnmounted(() => {
-  clearInterval(intervalId);
-});
 </script>
 
 <template>

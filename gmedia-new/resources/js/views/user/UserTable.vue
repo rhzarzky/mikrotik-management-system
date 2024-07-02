@@ -120,7 +120,6 @@ const deleteUser = async () => {
     <VTextField
       v-model="searchQuery"
       label="Search Users"
-      prepend-inner-icon="mdi-magnify"
       class="custom-input"
     >
       <template #prepend-inner>

@@ -1,11 +1,10 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import UserSettingsAccount from '@/views/user/UserSettingAccount.vue'
-import UserSettingsNotification from '@/views/user/UserSettingNotification.vue'
-import UserSettingsSecurity from '@/views/user//UserSettingSecurity.vue'
+import UserSettingsSecurity from '@/views/user/UserSettingSecurity.vue'
 
 const route = useRoute()
-const activeTab = ref(route.params.tab)
+const activeTab = ref(route.params.tab || 'account')
 
 // tabs
 const tabs = [
@@ -18,11 +17,6 @@ const tabs = [
     title: 'Security',
     icon: 'ri-lock-line',
     tab: 'security',
-  },
-  {
-    title: 'Notifications',
-    icon: 'ri-notification-3-line',
-    tab: 'notification',
   },
 ]
 </script>
@@ -60,11 +54,6 @@ const tabs = [
       <!-- Security -->
       <VWindowItem value="security">
         <UserSettingsSecurity />
-      </VWindowItem>
-
-      <!-- Notification -->
-      <VWindowItem value="notification">
-        <UserSettingsNotification />
       </VWindowItem>
     </VWindow>
   </div>

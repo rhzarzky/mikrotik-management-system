@@ -1,6 +1,6 @@
 <script setup>
-import UserTable from '@/views/user/UserTable.vue'
-import UserForm from '@/views/user/UserForm.vue'
+import UserProfileTable from '@/views/user-profile/UserProfileTable.vue'
+import UserProfileForm from '@/views/user-profile/UserProfileForm.vue'
 </script>
 
 <template>
@@ -9,13 +9,13 @@ import UserForm from '@/views/user/UserForm.vue'
     <VCol cols="12">
         <VCard title="User Form">
           <VCardText>
-            <UserForm />
+            <UserProfileForm />
           </VCardText>
         </VCard>
       </VCol>
     <VCol cols="12">
       <VCard title="User List">
-        <UserTable />
+        <UserProfileTable />
       </VCard>
     </VCol>
     

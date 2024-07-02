@@ -27,19 +27,16 @@
                   <tbody>
                     <tr>
                     <td>
-                      <div class="form-group">
-                        <label for="interface-select" class="form-label"></label>
-                        <select
-                          id="interface-select"
+                        <VSelect
+                          label="Interface"
                           v-model="selectedInterface"
+                          item-text="name"
                           @change="changeInterface"
-                          class="form-control custom-select"
-                        >
-                          <option v-for="data in interfaces" :key="data['.id']" :value="data">
-                            {{ data.name }}
-                          </option>
-                        </select>
-                      </div>
+                          class="form-control"
+                          :items="dataInterfaces.map(item => item.name)"
+                          style="min-width: 200px;"
+                          >
+                        </VSelect>
                     </td>
                       <td>
                         <v-text-field
@@ -73,7 +70,7 @@
   <script>
   import axios from 'axios';
   import Highcharts from 'highcharts';
-  import { computed, watch } from 'vue';
+  import { computed, watch, onBeforeUnmount, onMounted } from 'vue';
   import { useTheme } from 'vuetify';
   
   export default {
@@ -87,13 +84,14 @@
     },
     data() {
       return {
-        interfaces: [],
+        dataInterfaces: [],
         selectedInterface: null,
         chart: null,
         tx: 0,
         rx: 0,
         previousRxBytes: 0,
         previousTxBytes: 0,
+        intervalId: null, // To store the interval ID
       };
     },
     computed: {
@@ -105,7 +103,7 @@
       },
     },
     mounted() {
-      this.fetchInterfaces();
+      this.fetchdataInterfaces();
       this.initChart();
       watch(
         () => this.$vuetify.theme.dark,
@@ -116,20 +114,29 @@
         }
       );
 
+      // Clear interval when the component is unmounted
+      onBeforeUnmount(() => {
+        if (this.intervalId) {
+          clearInterval(this.intervalId);
+        }
+      });
     },
     methods: {
-      fetchInterfaces() {
+      fetchdataInterfaces() {
         axios.get('/interface-show')
           .then(response => {
             console.log('Interface data:', response.data);
-            this.interfaces = response.data.interface;
-            if (this.interfaces.length > 0) {
-              this.selectedInterface = this.interfaces[0];
+            this.dataInterfaces = response.data.interface.map(item => ({
+                id: item['.id'],
+                name: item.name,
+            }));
+            if (this.dataInterfaces.length > 0) {
+              this.selectedInterface = this.dataInterfaces[0].name;
               this.updateTraffic(this.selectedInterface);
             }
           })
           .catch(error => {
-            console.error("Error fetching interfaces:", error);
+            console.error("Error fetching dataInterfaces:", error);
             window.location.href = '/router';
           });
       },
@@ -180,11 +187,11 @@
             backgroundColor: this.backgroundColor.value, // Set initial background color
             events: {
               load: () => {
-                setInterval(() => {
+                this.intervalId = setInterval(() => {
                   if (this.selectedInterface) {
                     axios.get('/interface-show')
                       .then(response => {
-                        const interfaceData = response.data.interface.find(i => i.name === this.selectedInterface.name);
+                        const interfaceData = response.data.interface.find(i => i.name === this.selectedInterface);
                         this.updateTraffic(interfaceData);
                       })
                       .catch(error => {
@@ -255,7 +262,6 @@
           chart: {
             backgroundColor: this.backgroundColor.value,
           },
-
         });
       },
       convert(bytes) {
@@ -306,4 +312,3 @@
 }
 
   </style>
-  

@@ -25,6 +25,16 @@ export const routes = [
         component: () => import('@/pages/dashboard-router.vue'),
       },
       {
+        path: 'user-hotspot',
+        name: 'user-hotspot',
+        component: () => import('@/pages/user-hotspot.vue'),
+      },
+      {
+        path: 'user-profile',
+        name: 'user-profile',
+        component: () => import('@/pages/user-profile.vue'),
+      },
+      {
         path: 'account-settings',
         name: 'account-settings',
         component: () => import('@/pages/account-settings.vue'),

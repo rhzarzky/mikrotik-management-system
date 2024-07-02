@@ -67,6 +67,7 @@ class AuthController extends Controller
                 
                 $decryptedPassword = Crypt::decryptString($router->password);
     
+                $request->session()->put('id', $router->id);
                 $request->session()->put('address', $router->address);
                 $request->session()->put('username', $router->username);
                 $request->session()->put('password', $decryptedPassword);
