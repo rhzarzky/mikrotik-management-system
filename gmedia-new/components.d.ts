@@ -15,6 +15,5 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ThemeSwitcher: typeof import('./resources/js/@core/components/ThemeSwitcher.vue')['default']
-    UpgradeToPro: typeof import('./resources/js/components/UpgradeToPro.vue')['default']
   }
 }

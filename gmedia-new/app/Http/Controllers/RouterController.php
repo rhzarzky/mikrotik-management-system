@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Router;
+use Symfony\Component\HttpFoundation\Response;
 
 class RouterController extends Controller
 {
@@ -23,7 +24,7 @@ class RouterController extends Controller
             $routers = Router::with('user:id,email')->where('user_id', $userId)->get();
         }
 
-        return response()->json(['data' => $routers]);
+        return response()->json(['data' => $routers], Response::HTTP_OK);
     }
 
     /**
@@ -31,21 +32,21 @@ class RouterController extends Controller
      */
     public function store(Request $request)
     {
-        $validasi = $request->validate([
+        $validated = $request->validate([
             'address' => 'required',
             'routername' => 'required',
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        $validasi['password'] = Crypt::encryptString($validasi['password']);
-        $validasi['user_id'] = Auth::id();
+        $validated['password'] = Crypt::encryptString($validated['password']);
+        $validated['user_id'] = Auth::id();
 
         try {
-            Router::create($validasi);
-            return response()->json(['success' => true, 'message' => 'Router berhasil ditambahkan']);
+            Router::create($validated);
+            return response()->json(['success' => true, 'message' => 'Router berhasil ditambahkan'], Response::HTTP_CREATED);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Gagal menambahkan Router: ' . $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => 'Gagal menambahkan Router: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -54,21 +55,25 @@ class RouterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $item = Router::find($id);
-        $item->routername = $request->routername;
-        $item->address = $request->address;
-        $item->username = $request->username;
+        $router = Router::find($id);
+        if (!$router) {
+            return response()->json(['success' => false, 'message' => 'Router tidak ditemukan'], Response::HTTP_NOT_FOUND);
+        }
+
+        $router->routername = $request->input('routername');
+        $router->address = $request->input('address');
+        $router->username = $request->input('username');
 
         if ($request->filled('password')) {
             try {
-                $item->password = Crypt::encryptString($request->password);
+                $router->password = Crypt::encryptString($request->input('password'));
             } catch (\Exception $e) {
-                return response()->json(['success' => false, 'message' => 'Gagal mengenkripsi password']);
+                return response()->json(['success' => false, 'message' => 'Gagal mengenkripsi password'], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         }
 
-        $item->save();
-        return response()->json(['success' => true, 'message' => 'Data berhasil diubah']);
+        $router->save();
+        return response()->json(['success' => true, 'message' => 'Data berhasil diubah'], Response::HTTP_OK);
     }
 
     /**
@@ -76,12 +81,16 @@ class RouterController extends Controller
      */
     public function destroy(string $id)
     {
-        $item = Router::find($id);
-        if ($item) {
-            $item->delete();
-            return response()->json(['success' => true, 'message' => 'Router berhasil dihapus']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'Router tidak ditemukan']);
+        $router = Router::find($id);
+        if (!$router) {
+            return response()->json(['success' => false, 'message' => 'Router tidak ditemukan'], Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $router->delete();
+            return response()->json(['success' => true, 'message' => 'Router berhasil dihapus'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Gagal menghapus Router: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -14,27 +15,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
         $userRole = Auth::user()->role;
 
         if ($userRole == 'admin') {
-        $users = User::with('userData')->get();
+            $users = User::with('userData')->get();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'List Data User',
-            'data' => $users
-        ], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'List Data User',
+                'data' => $users
+            ], Response::HTTP_OK);
         } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized',
+            ], Response::HTTP_FORBIDDEN);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -42,37 +38,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-    // Validasi data yang diterima dari formulir
-    $validated = $request->validate([
-        'email' => 'required',
-        'username' => 'required',
-        'password' =>'required',
-        'role' => 'required'
-    ]);
-    $validated['password'] = Hash::make($validated['password']);
-    // Tambahkan user ke tabel pengguna
-    try {
-        User::create($validated);
-        return response()->json(['message' => 'User successfully created', 'user' => $user], 201);
-    } catch (\Exception $e) {
-        return response()->json(['message' => 'Failed to create user', 'error' => $e->getMessage()], 500);
-    }
-}
+        // Validasi data yang diterima dari formulir
+        $validated = $request->validate([
+            'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required',
+            'role' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $validated['password'] = Hash::make($validated['password']);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        try {
+            $user = User::create($validated);
+            return response()->json(['message' => 'User successfully created', 'user' => $user], Response::HTTP_CREATED);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to create user', 'error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -81,23 +62,37 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::find($id);
-        if ($user) {
-            $user->email = $request->email;
-            $user->username = $request->username; // Use 'username' instead of 'name'
-            $user->role = $request->role; // Use 'role' instead of 'level'
-            $user->save(); // Use save() instead of update()
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+            ], Response::HTTP_NOT_FOUND);
+        }
 
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'username' => 'required|unique:users,username,' . $user->id,
+            'role' => 'required'
+        ]);
+
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->role = $request->role;
+
+        try {
+            $user->save();
             return response()->json([
                 'success' => true,
                 'message' => 'User updated successfully',
                 'data' => $user
-            ]);
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update user',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'User not found',
-        ], 404);
     }
 
     /**
@@ -106,21 +101,31 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
-        if ($user) {
-            $user->delete();
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+            ], Response::HTTP_NOT_FOUND);
+        }
 
+        try {
+            $user->delete();
             return response()->json([
                 'success' => true,
                 'message' => 'User deleted successfully',
-            ]);
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete user',
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'User not found',
-        ], 404);
     }
 
+    /**
+     * Change the authenticated user's password.
+     */
     public function changePassword(Request $request)
     {
         $request->validate([
@@ -131,12 +136,17 @@ class UserController extends Controller
         $user = Auth::user();
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return response()->json(['error' => 'Current password is incorrect'], 400);
+            return response()->json(['error' => 'Current password is incorrect'], Response::HTTP_BAD_REQUEST);
         }
 
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+        try {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
 
-        return response()->json(['success' => 'Password changed successfully']);
+            return response()->json(['success' => 'Password changed successfully'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to change password', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
+

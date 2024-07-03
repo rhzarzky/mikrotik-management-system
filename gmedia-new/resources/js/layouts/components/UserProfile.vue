@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-import avatar1 from '@images/avatars/avatar-1.png'
-import { useRouter } from 'vue-router'
+import avatar1 from '@images/avatars/avatar-1.png';
+import { useRouter } from 'vue-router';
 
 const logout = async () => {
   try {
@@ -21,6 +21,7 @@ const username = ref('');
 const firstname = ref('');
 const lastname = ref('');
 const role = ref('');
+const photo = ref('');
 const router = useRouter();
 
 axios.get('/login-user')
@@ -32,7 +33,8 @@ axios.get('/login-user')
       role.value = data.role;
       // Check if firstname exists, otherwise use username
       firstname.value = data.user_data.firstname ?? data.username;
-      lastname.value = data.user_data.lastname ?? ''; // Provide default value for lastname if needed
+      lastname.value = data.user_data.lastname ?? '';
+      photo.value = data.user_data.photo ? `/photo-user` : avatar1;
     }
   })
   .catch(error => {
@@ -55,7 +57,7 @@ axios.get('/login-user')
       color="primary"
       variant="tonal"
     >
-      <VImg :src="avatar1" />
+      <VImg :src="photo" />
 
       <!-- SECTION Menu -->
       <VMenu
@@ -80,7 +82,7 @@ axios.get('/login-user')
                     color="primary"
                     variant="tonal"
                   >
-                    <VImg :src="avatar1" />
+                    <VImg :src="photo" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>

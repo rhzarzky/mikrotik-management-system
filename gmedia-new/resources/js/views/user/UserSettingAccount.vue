@@ -118,12 +118,12 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
-import { ref } from 'vue';
 import avatar1 from '@images/avatars/avatar-1.png';
 
 const accountData = ref({
-  avatarImg: avatar1,
+  photo: avatar1,
   firstName: '',
   lastName: '',
   email: '',
@@ -139,7 +139,7 @@ const fetchUserData = () => {
     .then(response => {
       const userData = response.data.data.user_data;
       accountData.value = {
-        photo: userData.photo ? `/storage/app/${userData.photo}` : avatar1,
+        photo: userData.photo ? `/photo-user` : avatar1,
         firstName: userData.firstname,
         lastName: userData.lastname,
         email: response.data.data.email,
@@ -159,19 +159,19 @@ const resetForm = () => {
 const changeAvatar = (event) => {
   const file = event.target.files[0];
   if (file) {
-    photoFile = file;
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
       if (typeof fileReader.result === 'string') {
-        accountData.value.avatarImg = fileReader.result;
+        accountData.value.photo = fileReader.result;
       }
     };
+    photoFile = file;
   }
 };
 
 const resetAvatar = () => {
-  accountData.value.avatarImg = avatar1;
+  accountData.value.photo = avatar1;
 };
 
 const saveChanges = () => {
@@ -191,8 +191,7 @@ const saveChanges = () => {
   })
     .then(response => {
       console.log('User data updated successfully:', response.data);
-      fetchUserData(); 
-      photoFile = null; 
+      photoFile = null;
     })
     .catch(error => {
       console.error('Error updating user data:', error);
@@ -200,8 +199,8 @@ const saveChanges = () => {
 };
 
 const deactivateAccount = () => {
-  // Implement account deactivation logic here
+  // Implement logika menonaktifkan akun di sini
 };
 
-fetchUserData(); // Initial fetch on component mount
+onMounted(fetchUserData); // Memuat data pengguna saat komponen dimuat
 </script>

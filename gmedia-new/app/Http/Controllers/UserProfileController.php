@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RouterosAPI;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserProfileController extends Controller
 {
@@ -16,18 +17,18 @@ class UserProfileController extends Controller
         $user = session()->get('username');
         $pass = session()->get('password');
         $API = new RouterosAPI();
-        $API->debug('false');
+        $API->debug = false;
 
         if ($API->connect($ip, $user, $pass)) {
             $hotspotProfiles = $API->comm('/ip/hotspot/user/profile/print');
 
             return response()->json([
                 'hotspotProfiles' => $hotspotProfiles,
-            ]);
+            ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'error' => 'Failed to connect to router',
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -40,30 +41,30 @@ class UserProfileController extends Controller
         $user = session()->get('username');
         $pass = session()->get('password');
         $API = new RouterosAPI();
-        $API->debug('false');
-    
+        $API->debug = false;
+
         if ($API->connect($ip, $user, $pass)) {
             $params = [
                 'name' => $request['name'],
             ];
 
-            if ($request->has('shared-users') !== 'unlimited' ) {
+            if ($request->has('shared-users') && $request['shared-users'] !== 'unlimited') {
                 $params['shared-users'] = $request['shared-users'];
             }
-    
-            if ($request['rate-limit'] !== 'unlimited') {
+
+            if ($request->has('rate-limit') && $request['rate-limit'] !== 'unlimited') {
                 $params['rate-limit'] = $request['rate-limit'];
             }
-    
+
             $API->comm('/ip/hotspot/user/profile/add', $params);
-    
+
             return response()->json([
                 'message' => 'Profile created successfully',
-            ]);
+            ], Response::HTTP_CREATED);
         } else {
             return response()->json([
                 'error' => 'Failed to connect to router',
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -77,32 +78,32 @@ class UserProfileController extends Controller
         $pass = session()->get('password');
         $API = new RouterosAPI();
         $API->debug = false;
-    
+
         if ($API->connect($ip, $user, $pass)) {
             $params = [
                 ".id" => $id,
                 'name' => $request['name'],
             ];
 
-            if ($request->has('shared-users') !== 'unlimited' ) {
-                $params['shared-users'] = $request['shared-users'];    
+            if ($request->has('shared-users') && $request['shared-users'] !== 'unlimited') {
+                $params['shared-users'] = $request['shared-users'];
             }
-    
-            if ($request['rate-limit'] !== 'unlimited') {
+
+            if ($request->has('rate-limit') && $request['rate-limit'] !== 'unlimited') {
                 $params['rate-limit'] = $request['rate-limit'];
             }
-    
-            $API->comm("/ip/hotspot/user/profile/set", $params);
-    
+
+            $API->comm('/ip/hotspot/user/profile/set', $params);
+
             return response()->json([
                 'message' => 'Profile updated successfully',
-            ]);
+            ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'error' => 'Failed to connect to router',
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-    }    
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -122,11 +123,11 @@ class UserProfileController extends Controller
 
             return response()->json([
                 'message' => 'Profile deleted successfully',
-            ]);
+            ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'error' => 'Failed to connect to router',
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

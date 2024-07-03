@@ -164,21 +164,26 @@ class UserHotspotController extends Controller
         $API->debug = false;
 
         if ($API->connect($ip, $user, $pass)) {
-            $timelimit = $request['timelimit'] ?: '0';
+            try {
+                for ($i=0; $i < $request['jum'] ; $i++) { 
+               
+                    $API->comm('/ip/hotspot/user/add', array(
+                        'name' => Str::random(4),
+                        'password' => Str::random(4),
+                        'profile' => $request['profile'],
+                        'limit-uptime' => $request['limit-uptime'],
+                        'disabled' => $request['disabled'],
+                        ));
+                    }
+                   
 
-            for ($i = 0; $i < $request['jum']; $i++) {
-                $API->comm('/ip/hotspot/user/add', [
-                    'name' => Str::random(4),
-                    'password' => Str::random(4),
-                    'profile' => $request['profile'],
-                    'limit-uptime' => $timelimit,
-                    'disabled' => $request['disabled'],
-                ]);
+                return response()->json(['message' => 'Vouchers generated successfully'], Response::HTTP_CREATED);
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
             }
-
-            return response()->json(['message' => 'Vouchers generated successfully'], Response::HTTP_CREATED);
         } else {
             return response()->json(['error' => 'Failed to connect to RouterOS'], Response::HTTP_BAD_REQUEST);
         }
     }
+
 }
